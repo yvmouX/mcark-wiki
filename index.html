@@ -59,19 +59,6 @@
         nextText: '下一章节',
         crossChapter: true,
       },
-      plugins: [
-        EditOnGithubPlugin.create(
-          'https://github.com/lexmin0412/docsify-website-sample/blob/master/docs/',
-          null,
-          function ( file ) {
-            if ( file.indexOf( 'en' ) === -1 ) {
-              return '在 GitHub 上编辑'
-            } else {
-              return 'Edit on Github'
-            }
-          }
-        )
-      ],
 
       
     }
