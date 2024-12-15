@@ -13,6 +13,9 @@
   <!-- Default Theme (see https://docsify.js.org/#/themes) -->
   <!-- vue主题样式 -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <!-- 暗黑主题插件样式 -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/style.min.css"
+    title="docsify-darklight-theme" type="text/css" />
 </head>
 
 <body>
@@ -27,11 +30,11 @@
       basePath: '/docs/', // 资源相对路径
       name: 'ARK服务器维基百科',
       nameLink: '/', // 点击文档标题后的跳转地址
-      repo: 'lexmin0412/docsify-website-sample', // 有repo属性则右上角会展示github图标，点击可进入
-      externalLinkTarget: '_blank', // 外部链接的打开方式，默认_blank
-      cornerExternalLinkTarget: '_blank', // 右上角链接的打开方式。默认为 _blank
-      routerMode: 'hash', // 路由方式 默认hash
-      coverpage: false, // 展示封面
+      // repo: 'lexmin0412/docsify-website-sample', // 有repo属性则右上角会展示github图标，点击可进入
+      // externalLinkTarget: '_blank', // 外部链接的打开方式，默认_blank
+      // cornerExternalLinkTarget: '_blank', // 右上角链接的打开方式。默认为 _blank
+      // routerMode: 'hash', // 路由方式 默认hash
+      // coverpage: false, // 展示封面
       notFoundPage: true, // 在找不到指定页面时加载_404.md
 
       // Sidebar Configuration
@@ -59,9 +62,10 @@
         nextText: '下一章节',
         crossChapter: true,
       },
+      
       plugins: [
         EditOnGithubPlugin.create(
-          'https://github.com/lexmin0412/docsify-website-sample/blob/master/docs/',
+          'https://github.com/yvmouX/mcark-wiki/tree/main/docs/',
           null,
           function ( file ) {
             if ( file.indexOf( 'en' ) === -1 ) {
@@ -73,17 +77,52 @@
         )
       ],
 
-      
+      themeColor: "#42b983", // 暗黑模式主题色
+      darklightTheme: {
+        siteFont: "PT Sans",
+        defaultTheme: 'dark',
+        codeFontFamily: 'Roboto Mono, Monaco, courier, monospace',
+        bodyFontSize: '17px',
+        dark: {
+          accent: '#42b983',
+          toogleBackground: '#ffffff',
+          background: '#091a28',
+          textColor: '#b4b4b4',
+          codeTextColor: '#ffffff',
+          codeBackgroudColor: '#0e2233',
+          borderColor: '#0d2538',
+          blockQuoteColour: '#858585',
+          highlightColor: '#d22778',
+          sidebarSublink: '#b4b4b4',
+          codeTypeColor: '#ffffff',
+          coverBackground: 'linear-gradient(to left bottom, hsl(118, 100%, 85%) 0%,hsl(181, 100%, 85%) 100%)',
+          toogleImage: 'url(https://cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/icons/sun.svg)'
+        },
+        light: {
+          accent: '#42b983',
+          toogleBackground: '#091a28',
+          background: '#ffffff',
+          textColor: '#34495e',
+          codeTextColor: '#525252',
+          codeBackgroudColor: '#f8f8f8',
+          borderColor: 'rgba(0, 0, 0, 0.07)',
+          blockQuoteColor: '#858585',
+          highlightColor: '#d22778',
+          sidebarSublink: '#b4b4b4',
+          codeTypeColor: '#091a28',
+          coverBackground: 'linear-gradient(to left bottom, hsl(118, 100%, 85%) 0%,hsl(181, 100%, 85%) 100%)',
+          toogleImage: 'url(https://cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/icons/moon.svg)'
+        }
+      }
     }
 
     
   </script>
-
+  
+  <!-- 插件 -->
   
   <!-- Required -->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-
-  
   <!-- Recommended -->
   <!--图片缩放插件-->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
@@ -95,8 +134,8 @@
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
   <!-- 阅读进度条插件 -->
   <script src="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/index.min.js"></script>
-  
+  <!-- 暗黑主题切换插件 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/index.min.js"></script>
 
-  
 </body>
 </html>
