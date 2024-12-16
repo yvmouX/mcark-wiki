@@ -7,12 +7,16 @@
     content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
 
   <!-- Replace with your own title and description. -->
-  <title>ARK服务器维基百科</title>
-  <meta name="description" content="ARK地缘政治服务器维基百科.">
+  <title>ARK Earth</title>
+  <meta name="description" content="ARK Earth 地缘政治服务器维基百科.">
 
   <!-- Default Theme (see https://docsify.js.org/#/themes) -->
   <!-- vue主题样式 -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <!-- 侧边栏插件 -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css" />
+
+  <link rel="icon" href="https://img-cdn.yvmou.cn/pigo/202412170157793.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -25,13 +29,15 @@
     // Docsify 配置 (see https://docsify.js.org/#/configuration)
     window.$docsify = {
       basePath: '/docs/', // 资源相对路径
-      name: 'ARK服务器维基百科',
+      name: 'ARK Earth',
       nameLink: '/', // 点击文档标题后的跳转地址
-      // repo: 'lexmin0412/docsify-website-sample', // 有repo属性则右上角会展示github图标，点击可进入
+      homepage: '/开始.md',
+      repo: 'https://github.com/yvmouX/mcark-wiki', // 有repo属性则右上角会展示github图标，点击可进入
+      //logo: 'https://img.yvmou.cn/blog/202410272127837.png',
       // externalLinkTarget: '_blank', // 外部链接的打开方式，默认_blank
       // cornerExternalLinkTarget: '_blank', // 右上角链接的打开方式。默认为 _blank
       // routerMode: 'hash', // 路由方式 默认hash
-      // coverpage: false, // 展示封面
+      coverpage: true, // 展示封面
       // notFoundPage: true, // 在找不到指定页面时加载_404.md
 
       // 侧边栏 Configuration
@@ -51,6 +57,12 @@
         // Headline depth, 1 - 6
         depth: 2,
       },
+
+      // 侧边栏插件配置
+      sidebarDisplayLevel: 1, // set sidebar display level
+      // 页脚插件配置
+      loadFooter: true,
+      loadFooter: '_footer.md',
       
       plugins: [
         EditOnGithubPlugin.create(
@@ -81,6 +93,22 @@
   <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.js"></script>
   <!--代码段复制插件-->
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
-
+  <!--字数统计插件-->
+  <script src="https://cdn.jsdelivr.net/npm/docsify-count@latest/dist/countable.min.js"></script>
+  <!--上下一章插件-->
+  <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  
+  <!--插入ptf 教程 https://github.com/lazypanda10117/docsify-pdf-embed-->
+  <!-- PDFObject.js is a required dependency of this plugin -->
+  <!--  <script src="//cdnjs.cloudflare.com/ajax/libs/pdfobject/2.1.1/pdfobject.min.js"></script>   -->
+  <!-- This is the source code of the pdf embed plugin -->
+  <!--  <script src="path-to-file/docsify-pdf-embed.js"></script>  -->
+  <!-- or use this if you are not hosting the file yourself -->
+  <!--  <script src="//unpkg.com/docsify-pdf-embed-plugin/src/docsify-pdf-embed.js"></script>  -->
+  
+  <!-- 侧边栏 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+  <!-- 页脚 -->
+  <script src="//cdn.jsdelivr.net/npm/@alertbox/docsify-footer/dist/docsify-footer.min.js"></script>
 </body>
 </html>
