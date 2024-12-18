@@ -1,4 +1,6 @@
- :root {
-     --base-font-size: 14px;
-     --theme-color: rgb(38, 156, 46);
- }
+:root {
+    --base-font-size: 14px;
+    --theme-color: rgb(38, 156, 46);
+    --cover-background-image: url('https://img-cdn.yvmou.cn/pigo/202412161810115.png');
+    --cover-heading-color: rgb(0, 0, 0);
+}
