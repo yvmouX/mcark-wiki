@@ -21,6 +21,8 @@
   <!-- Custom theme stylesheet -->
   <link rel="stylesheet" href="theme-custom.css">
 
+  <!-- 箭头样式 -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/sidebar.min.css" /> 
 
 </head>
 
@@ -52,7 +54,12 @@
       loadSidebar: true, // 加载侧边栏
       maxLevel: 0,
       // Set subMaxLevel to 0 to remove automatic display of page table of contents (TOC) in Sidebar
-      subMaxLevel: 3,
+      subMaxLevel: 2,
+
+
+      sidebarDisplayLevel: 0,
+
+
 
       // 导航栏
       loadNavbar: true,
@@ -116,6 +123,9 @@
 
   <!-- 页脚 -->
   <script src="//jsd.vxo.im/npm/@alertbox/docsify-footer/dist/docsify-footer.min.js"></script>
+
+  <!-- 侧边栏目录折叠 -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
 
 </body>
 
