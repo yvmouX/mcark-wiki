@@ -13,16 +13,14 @@
   <link rel="icon" href="https://img-cdn.yvmou.cn/pigo/202412170157793.ico" type="image/x-icon">
 
   <!-- 主题样式 https://jhildenbiddle.github.io/docsify-themeable/#/-->
-  <link rel="stylesheet" media="(prefers-color-scheme: dark)"
-    href="https://jsd.vxo.im/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
-  <link rel="stylesheet" media="(prefers-color-scheme: light)"
-    href="https://jsd.vxo.im/npm/docsify-themeable@0/dist/css/theme-simple.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
 
   <!-- Custom theme stylesheet -->
   <link rel="stylesheet" href="theme-custom.css">
 
   <!-- 箭头样式 -->
-  <link rel="stylesheet" href="//jsd.vxo.im/npm/docsify-sidebar-collapse/dist/sidebar.min.css" /> 
+  <!--  <link rel="stylesheet" href="//jsd.vxo.im/npm/docsify-sidebar-collapse/dist/sidebar.min.css" />  -->
+  <link rel="stylesheet" href="https://unpkg.com/docsify-plugin-toc@1.3.1/dist/light.css">
 
 </head>
 
@@ -44,6 +42,7 @@
       // externalLinkTarget: '_blank', // 外部链接的打开方式，默认_blank
       // cornerExternalLinkTarget: '_blank', // 右上角链接的打开方式。默认为 _blank
       // routerMode: 'hash', // 路由方式 默认hash
+      crossOriginLinks: ['http://b1.sjcmc.cn:14356/'],
       coverpage: true, // 展示封面
       onlyCover: false,
       // notFoundPage: true, // 在找不到指定页面时加载_404.md
@@ -54,10 +53,10 @@
       loadSidebar: true, // 加载侧边栏
       maxLevel: 0,
       // Set subMaxLevel to 0 to remove automatic display of page table of contents (TOC) in Sidebar
-      subMaxLevel: 2,
+      subMaxLevel: 1,
 
 
-      sidebarDisplayLevel: 0,
+      //sidebarDisplayLevel: 1,
 
 
 
@@ -69,7 +68,12 @@
         placeholder: '🔍 搜索',
         noData: '😞 没有结果!',
         // Headline depth, 1 - 6
-        depth: 2,
+        depth: 1,
+      },
+      toc: {
+      tocMaxLevel: 3,
+      target: 'h1, h2, h3, h4, h5',
+      ignoreHeaders:  ['<!-- {docsify-ignore} -->', '<!-- {docsify-ignore-all} -->'],
       },
 
       // 页脚插件配置
@@ -100,7 +104,7 @@
 
   <!-- Required -->
   <script src="https://jsd.vxo.im/npm/docsify@4/lib/docsify.min.js"></script>
-  <script src="https://jsd.vxo.im/npm/docsify-themeable@0/dist/js/docsify-themeable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/js/docsify-themeable.min.js"></script>
   <!-- Recommended -->
   <!--图片缩放插件-->
   <script src="https://jsd.vxo.im/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
@@ -113,22 +117,20 @@
   <!--上下一章插件-->
   <script src="//s4.zstatic.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
 
-  <!--插入ptf 教程 https://github.com/lazypanda10117/docsify-pdf-embed-->
-  <!-- PDFObject.js is a required dependency of this plugin -->
-  <!--  <script src="//cdnjs.cloudflare.com/ajax/libs/pdfobject/2.1.1/pdfobject.min.js"></script>   -->
-  <!-- This is the source code of the pdf embed plugin -->
-  <!--  <script src="path-to-file/docsify-pdf-embed.js"></script>  -->
-  <!-- or use this if you are not hosting the file yourself -->
-  <!--  <script src="//unpkg.com/docsify-pdf-embed-plugin/src/docsify-pdf-embed.js"></script>  -->
+  <!--插入ptf  https://github.com/lazypanda10117/docsify-pdf-embed-->
 
   <!-- 页脚 -->
   <script src="//jsd.vxo.im/npm/@alertbox/docsify-footer/dist/docsify-footer.min.js"></script>
 
   <!-- 侧边栏目录折叠 -->
-  <script src="https://jsd.vxo.im/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+  <!-- <script src="https://jsd.vxo.im/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script> -->
 
   <!-- docsify-tabs (latest v1.x.x) -->
   <script src="https://jsd.vxo.im/npm/docsify-tabs@1"></script>
+
+  <script src="https://unpkg.com/docsify-plugin-toc@1.3.1/dist/docsify-plugin-toc.min.js"></script>
+
+
 
 </body>
 
