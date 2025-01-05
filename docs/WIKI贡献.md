@@ -1,18 +1,14 @@
 # 贡献渠道<!-- {docsify-ignore-all} -->
 
-[ArkEarth玩家交流社区(推荐)](https://bbs.mcark.icu/t/wiki)
-
-[ArkEarth文档仓库提交issue(推荐)](https://github.com/yvmouX/mcark-wiki)
-
-[AekEarth玩家交流频道](https://pd.qq.com/s/72zw08lfl)
-
-[ArkEarth玩家交流群](https://qm.qq.com/q/nHkeTRi5iM)
-
-
+- [ArkEarth文档仓库提交issue或者PR(非常推荐)](https://github.com/yvmouX/mcark-wiki)
+  - 如果可以的话，我们是非常推荐您直接提交PR的
+- [ArkEarth玩家交流社区(推荐)](https://bbs.mcark.icu/t/wiki)
+- [AekEarth玩家交流频道](https://pd.qq.com/s/72zw08lfl)
+- [ArkEarth玩家交流群](https://qm.qq.com/q/nHkeTRi5iM)
 
 # 格式要求
 
-?> 非硬性要求
+?> 不提交pr的情况下，这不是硬性要求
 
 参照[Markdown基础语法](https://markdown.com.cn/basic-syntax/)
 

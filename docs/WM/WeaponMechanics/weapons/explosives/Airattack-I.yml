@@ -1,0 +1,124 @@
+Airattack_I:
+  Info:
+    Weapon_Item:
+      Type: "TARGET" #这个是标靶
+      Name: "<gold>精准打击I"
+      Lore:
+        - "<gray>使用至多4枚250磅炸弹打击指定位置"
+        - ""
+        - "<gold>➣<gray> 2 <gold> 次轰炸"
+        - "<gold>➣每次 <gray> 1-2 <gold> 枚炸弹"
+        - "<gold>➣爆炸半径 <gray> 10 <gold>"
+        - ""
+        - "精准打击能够对指定区域造成毁灭性的打击"
+      Enchantments:  # 武器带有的附魔属性
+        - FIRE_ASPECT 1
+      Unbreakable: true
+      Hide_Flags: true
+      Deny_Use_In_Crafting: true
+    Weapon_Get_Mechanics:
+      - "Sound{sound=ITEM_ARMOR_EQUIP_CHAIN, pitch=0.75}"
+    Cancel:
+      Block_Interactions: true
+      Item_Interactions: true
+  # 子弹模块 
+  Projectile:
+    # 其实都保持默认就行
+    Projectile_Settings:
+      Type: "DROPPED_ITEM"  #类型，默认是掉落的物品。就是把投掷物投掷出去后，会变成掉落物
+      Projectile_Item_Or_Block:
+        Type: "REDSTONE_TORCH" # 意思是将DRPPOED_ITEM设置为红石火把
+      Disable_Entity_Collisions: true
+    Bouncy: # 弹跳
+      Maximum_Bounce_Amount: -1 # 最大弹跳次数，默认-1就是无限
+      Blocks:
+        Allow_Any: true
+        Default_Speed_Multiplier: 0.6 # 默认速度衰减
+      Rolling: # 滚动
+        Required_Motion_To_Start_Rolling: 5 # 开始滚动所需的最小速度
+        Blocks:
+          Allow_Any: true
+          Default_Speed_Multiplier: 0.9
+          List:
+            - "$_ICE-0.99"
+            - "ICE-0.99"
+    # 该配置的官网文档链接已经在消耗品模板注释了，可以Ctrl+F查找
+    Mechanics:
+      - "Sound{sound=ENTITY_ENDER_DRAGON_GROWL, volume=10, pitch=1, delayBeforePlay=10} ?Range{max=500}"
+      - "Sound{sound=ENTITY_WITHER_AMBIENT, volume=6, pitch=1, delayBeforePlay=100} ?Range{max=300}"
+      - "Message{message=<dark_red><bold>精准打击已就绪！} @World{} ?Range{max=500}"
+      - "Message{message=<aqua>坐标：x\\=<target_x> z\\=<target_z>} @World{} ?Range{max=500}"
+  Shoot:
+    Trigger:
+      Main_Hand: "RIGHT_CLICK"
+      Off_Hand: "RIGHT_CLICK"
+      Circumstance:
+        Swimming: "DENY"
+    Projectile_Speed: 36 # 速度
+    Delay_Between_Shots: 10 # 使用间隔
+    Consume_Item_On_Shoot: true # 使用后消耗物品
+    Mechanics:
+      - "Sound{sound=ENTITY_EGG_THROW, volume=0.5, noise=0.1}"
+  Damage:
+    Base_Explosion_Damage: 20.0 # 基础爆炸伤害
+    Fire_Ticks: 60 # 燃烧时间
+    Armor_Damage: 50 # 对护甲伤害
+    Mechanics:
+      - "Potion{potion=CONFUSION, time=200, level=3, particles=HIDE} @Target{}" #一个眩晕的药水效果
+  # 爆炸模块,官网WIKI：https://cjcrafter.gitbook.io/weaponmechanics/weapon-modules/explosion
+  Explosion:
+    Knockback_Multiplier: 1.0 # 爆炸击退倍率
+    Explosion_Exposure: "NONE" # 爆炸暴露,
+    Explosion_Shape: "SPHERE" # 爆炸形状
+    Explosion_Type_Data:
+      Radius: 10 # 爆炸半径
+    Detonation:
+      Delay_After_Impact: 100  # 碰撞后触发爆炸的延迟
+      Remove_Projectile_On_Detonation: true # 爆炸后移除物品
+      Impact_When:
+        Spawn: true # 碰撞实体时触发爆炸
+    # 空袭 
+    Airstrike:
+      Dropped_Projectile:
+        Projectile_Settings:
+          Type: "PRIMED_TNT" # 空袭弹药类型设置
+        Disable_Entity_Collisions: true # 禁用实体碰撞
+      Minimum_Bombs: 2 # 最小炸弹数量
+      Maximum_Bombs: 2 # 最大炸弹数量
+      Height: 90 # 空袭高度
+      Vertical_Randomness: 0 # 垂直随机性
+      Distance_Between_Bombs: 3 # 炸弹之间的距离
+      Maximum_Distance_From_Center: 3 # 距离中心的最大距离
+      Layers: 2 # 空袭次数
+      Delay_Between_Layers: 30 # 每次的延迟
+      Detonation:
+        Impact_When:
+          Block: true # 碰撞方块时触发爆炸
+    Block_Damage:
+      Spawn_Falling_Block_Chance: 0 # 掉落方块的几率
+      Default_Mode: BREAK # 默认方块破坏模式 BREAK
+      Blocks:
+        - "BEDROCK cancel"
+        - "$WATER cancel"  # stationary_water and moving_water
+        - "OBSIDIAN cancel"
+        - "$LAVA cancel"  # stationary_lava and moving_lava
+    Regeneration:
+      Ticks_Before_Start: 100
+      Max_Blocks_Per_Update: 5
+      Ticks_Between_Updates: 5
+    Mechanics:
+      - "CustomSound{sound=explosion.frag, volume=6, noise=0.1} @Target{}"
+
+  # The following options are added by WeaponMechanicsCosmetics, and you will
+  # not see the changes take effect until you purchase it.
+
+  Cosmetics:
+    Splash_Mechanics:
+      - "Sound{sound=ENTITY_GENERIC_SPLASH, pitch=1.85, noise=0.15} @Target{}"
+      - "Particle{particle=WATER_SPLASH, count=20, noise=0.2 0.2 0.2} @Target{}"
+
+  Trail:
+    Distance_Between_Particles: 0.3
+    Particle_Chooser: LOOP
+    Particles:
+      - "Particle{particle=FLAME}"

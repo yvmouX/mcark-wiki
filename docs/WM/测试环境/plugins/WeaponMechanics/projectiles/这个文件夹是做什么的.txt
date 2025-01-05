@@ -1,0 +1,34 @@
+你不需要对这个文件夹下面的内容做任何修改！
+
+这个文件夹是用来存放每把武器的Projectile模块配置的。
+但是为了使没把武器的配置参数更加独立，所以每把武器的Projectile模块配置都放在了各自的武器配置文件中。
+
+如下：（以M4A1为例）
+  Projectile: 
+    Projectile_Settings:
+      Type: "SNOWBALL"  
+      Gravity: 10 
+
+      Minimum:
+        Speed: 60 # 子弹飞行的最小速度
+        Remove_Projectile_On_Speed_Reached: true # 当子弹速度达到最小速度时，是否删除子弹
+      Drag: # 子弹飞行时的阻力
+        Base: 0.99
+        In_Water: 0.8
+        When_Raining_Or_Snowing: 0.95
+      Disable_Entity_Collisions: true # 是否禁用子弹与实体的碰撞
+      Maximum_Alive_Ticks: 600 # 子弹存在的最大时间
+      Maximum_Travel_Distance: 9999 # 子弹被删除之前可以移动的最大距离
+    
+    Through: # 子弹穿透方块
+      Maximum_Through_Amount: 2 # 子弹穿透方块的最大数量
+      Blocks:
+        Allow_Any: false # 是否允许子弹穿透所有方块，将覆盖Whitelist和List
+        Default_Speed_Multiplier: 0.8 # 子弹穿透方块时的速度乘的值，设置为负数给子弹减速
+        Whitelist: true # 是否使用白名单
+        List:
+          - "$GLASS"
+          - "$LEAVES"
+      Entities:
+        Allow_Any: true 
+        Default_Speed_Multiplier: 0.7 #

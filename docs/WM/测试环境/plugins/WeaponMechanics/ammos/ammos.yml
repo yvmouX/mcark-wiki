@@ -1,0 +1,14 @@
+test-ammo:
+  Item_Ammo:
+    Bullet_Item:
+      Type: IRON_NUGGET
+#      Custom_Model_Data: 2  # Use custom model data if you want to use a custom texture for the ammo
+      Name: "<red>7.62mm 子弹"
+      Lore:
+        - "<gray>伤害极高的弹药"
+    Ammo_Converter_Check: # 弹药转换检查
+      Type: true
+      Name: true
+      Lore: true
+      Enchants: true
+      Custom_Model_Data: false

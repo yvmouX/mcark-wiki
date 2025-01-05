@@ -1,0 +1,231 @@
+RPG_7:
+  Info:
+    Weapon_Item:
+      Type: "FEATHER"
+      Name: "<gold>RPG-7"
+      Lore:
+        - "<gray>无制导单兵火箭发射器"
+        - "弹药:<gray> 高爆火箭弹"
+        - ""
+        - "最好别挨到火箭弹"
+        - ""
+        - "<gold>基础伤害➣<gray> 12"
+        - "<gold>基础爆炸伤害➣<gray> 18"
+        - "<gold>最大耐久➣<gray> 20"
+        - ""
+        - "<gold>按Q装填"
+      Unbreakable: true
+      Hide_Flags: true
+      Attributes:
+        - "GENERIC_MOVEMENT_SPEED -0.02855"
+      Deny_Use_In_Crafting: true
+    Weapon_Info_Display:
+      Action_Bar:
+        Message: "<gold>RPG-7 <gray>«<gold><ammo_left><gray>»<gold><reload>"
+    Weapon_Get_Mechanics:
+      - "Sound{sound=ITEM_ARMOR_EQUIP_CHAIN, pitch=0.75, listeners=Source{}}"
+    Weapon_Equip_Delay: 40
+    Cancel:
+      Drop_Item: true
+      Swap_Hands: true 
+      Arm_Swing_Animation: true
+      Break_Blocks: true 
+  Skin:
+    Default: 4
+    Scope: ADD 1000
+    Sprint: ADD 2000
+    blue: ADD 10000 # blue and red will only work if you have WMC purchased
+    red: ADD 20000
+  Projectile: 
+    Projectile_Settings:
+      Type: "ARMOR_STAND"
+      Projectile_Item_Or_Block:
+        Type: "FEATHER"
+        Custom_Model_Data: -100
+      Minimum:
+        Speed: 40
+      Gravity: 4.0
+      Drag:
+        Base: 0.99
+        In_Water: 0.96
+        When_Raining_Or_Snowing: 0.98
+      Size: 0.5
+  Shoot:
+    Trigger:
+      Main_Hand: "RIGHT_CLICK"
+      Off_Hand: "RIGHT_CLICK"
+      Circumstance:
+        Swimming: "DENY"
+        Sprinting: "DENY"
+        Dual_Wielding: "DENY"
+    Projectile_Speed: 50
+    Spread:
+      Base_Spread: 5.5
+      Modify_Spread_When:
+        Zooming: 40%
+        Sneaking: 50%
+        In_Midair: 150%
+    Recoil:
+      Push_Time: 200
+      Recover_Time: 200
+      Horizontal:
+        - 11
+      Vertical:
+        - 11
+      Modify_Recoil_When:
+        Zooming: 30%
+        Sneaking: 50%
+        In_Midair: 150%
+    Mechanics:
+      - "CustomSound{sound=shoot.rpg7.loud, volume=6, noise=0.1}"
+      - "Damage{damage=10.0} @World{} ?Range{max=4} ?InCone{direction=~0 0 -1, angle=28}"
+
+
+
+  Reload:
+    Trigger:
+      Main_Hand: "DROP_ITEM"
+      Off_Hand: "DROP_ITEM"
+    Magazine_Size: 1
+    Reload_Duration: 71
+    Start_Mechanics:
+      - "Sound{sound=BLOCK_NOTE_BLOCK_HAT, volume=0.5, noise=0.1}"
+      - "Sound{sound=BLOCK_PISTON_CONTRACT, volume=0.5, noise=0.1, delayBeforePlay=2}"
+      - "Sound{sound=ITEM_FLINTANDSTEEL_USE, volume=0.5, pitch=1.5, delayBeforePlay=33}"
+      - "Sound{sound=ITEM_FLINTANDSTEEL_USE, volume=0.5, pitch=1.7, delayBeforePlay=35}"
+      - "Sound{sound=ITEM_FLINTANDSTEEL_USE, volume=0.5, pitch=1.9, delayBeforePlay=37}"
+      - "Sound{sound=BLOCK_PISTON_EXTEND, volume=0.5, noise=0.1, delayBeforePlay=69}"
+
+    Ammo:
+      Ammos:
+        - rocket
+    Custom_Durability:
+      Max_Durability: 20 # 最大耐久
+      Min_Max_Durability: 0 # 最小最大耐久，意味着在你一遍又一遍地不断修理武器之后，最大耐久永远不会低于这个值
+      #Lose_Max_Durability_Per_Repair: 500 # 每次修复损失的最大耐久。该项在修复工具中已经设置，所以这里不需要设置
+      Durability_Per_Shot: 1 # 每次射击耐久损失
+      Chance_To_Lose: 100% # 每次射击耐久损失的概率
+      Broken_Item: 
+        Type: IRON_SHOVEL
+        Name: "<red>损坏的RPG-7"
+        Lore: 
+          - ""
+          - "看来需要修理一下了"
+      #Repair_Items:
+      #  - "universal_gun_repair_kit" # 修复工具，默认通用修复工具。您不需要修改它，只需要说明添加注释说明您需要的修复工具的属性，我们会根据您的注释进行修改。
+      # 保持默认即可
+      Break_Mechanics:
+        - "Sound{sound=ENTITY_ITEM_BREAK}"
+      Repair_Mechanics:
+        - "Sound{sound=BLOCK_ANVIL_USE}"
+      Deny_Repair_Mechanics:
+        - "Sound{sound=ENTITY_VILLAGER_NO}"
+        - "ActionBar{message=<red>Cannot repair item any more}"
+
+
+  Damage:
+    Base_Damage: 12
+    Base_Explosion_Damage: 18
+    Fire_Ticks: 40
+    Armor_Damage: 30
+    Mechanics:
+      - "Potion{potion=CONFUSION, time=200, level=3, particles=HIDE} @Target{}"
+
+
+
+  Explosion:
+    Explosion_Exposure: "DISTANCE"
+    Explosion_Shape: "SPHERE"
+    Explosion_Type_Data:
+      Radius: 5.6
+    Detonation:
+      Impact_When:
+        Entity: true
+        Block: true
+
+    Block_Damage:
+      Spawn_Falling_Block_Chance: 0.75
+      Default_Mode: BREAK
+      Blocks:
+        - "BEDROCK cancel"
+        - "$WATER cancel"  # stationary_water and moving_water
+        - "OBSIDIAN cancel"
+        - "$LAVA cancel"  # stationary_lava and moving_lava
+    Regeneration:
+      Ticks_Before_Start: 100
+      Max_Blocks_Per_Update: 5
+      Ticks_Between_Updates: 5
+
+
+
+  Scope:
+    Trigger:
+      Main_Hand: "LEFT_CLICK"
+      Off_Hand: "LEFT_CLICK"
+    Zoom_Amount: 1.4
+    Shoot_Delay_After_Scope: 18
+    Mechanics:
+      - "CustomSound{sound=scope.in, volume=0.5, noise=0.1, listeners=Source{}}"
+    Zoom_Off:
+      Mechanics:
+        - "CustomSound{sound=scope.out, volume=0.5, noise=0.1, listeners=Source{}}"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  # The following options are added by WeaponMechanicsCosmetics, and you will
+  # not see the changes take effect until you purchase it.
+
+  Cosmetics:
+    Muzzle_Flash: true
+    Splash_Mechanics:
+      - "Sound{sound=ENTITY_GENERIC_SPLASH, pitch=1.85, noise=0.15} @Target{}"
+      - "Particle{particle=WATER_SPLASH, count=20, noise=0.2 0.2 0.2} @Target{}"
+    Crossbow:
+      Only_When_Scoping: false
+
+  Trail:
+    Distance_Between_Particles: 0.25
+    Particle_Chooser: LOOP
+    Particles:
+      - "Particle{particle=SMOKE_NORMAL, count=3, noise=0.01 0.01 0.01}"
+
+  Show_Time:
+    Reload:
+      Item_Cooldown: true
+      Exp: true
+      Boss_Bar:
+        Message: "<gray>Reloading <time>s"
+        Color: YELLOW
+        Style: PROGRESS
+    Weapon_Equip_Delay:
+      Item_Cooldown: true
+    Shoot_Delay_After_Scope:
+      Item_Cooldown: true

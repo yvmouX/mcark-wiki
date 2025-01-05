@@ -1,0 +1,838 @@
+# the debug level dictates what is printed to console
+#   0: No printing
+#   1: Errors/Info
+#   2: Warnings (Suggested)
+#   3: Debug
+Debug_Level: 2
+Print_Traces: false
+
+# Notifies you when there is an update
+Update_Checker:
+  Enable: true
+
+# WeaponMechanics stores statistics of players such as how
+# much damage has the player done using some weapon.
+Database:
+  Enable: true # whether statistics should be tracked
+  Type: "SQLITE" # available is SQLITE and MYSQL
+  MySQL:
+    Hostname: "localhost"
+    Port: 3306
+    Database: "weaponmechanics"
+    Username: "root"
+    Password: ""
+  SQLite:
+    Absolute_Path: "plugins/WeaponMechanics/weaponmechanics.db"
+
+# 用于跟踪武器协助
+Assists_Event:
+  Enable: true
+  Only_Players: true # true to only track player kill assists
+  Required_Damage_Amount: 0 # damage amount for assist, 0 to disable
+  Timer: 100 # last damage time in ticks before death for assist, 0 to disable
+
+# 大多数消息是按武器处理的
+# WorldGuard 消息是可配置的，使用武器-射击-消息标志
+Messages:
+  Permissions:
+    Use_Weapon: "&4你没有权限使用 %weapon-title%"
+
+# 自动下载 MechanicsCore 当没有安装时
+Mechanics_Core_Download:
+  Enabled: true
+  Connection_Timeout: 10
+  Read_Timeout: 30
+
+# 自动下载资源包
+Resource_Pack_Download:
+  Enabled: true  # even when this is false, you can use "Automatically_Send_To_Player"
+  #
+  # THIS DEFAULT LINK IS PURELY FOR TESTING PURPOSES!
+  # You should replace it with your own resource pack link as soon as possible.
+  #
+  Link: "https://raw.githubusercontent.com/WeaponMechanics/MechanicsMain/master/WeaponMechanicsResourcePack.zip"
+  Connection_Timeout: 10
+  Read_Timeout: 30
+  Automatically_Send_To_Player: true
+  Force_Player_Download: false # When this is true, the player will be kicked from the server if they don't download the pack
+  Kick_Message: "You must download the resource pack! (WeaponMechanics)"
+
+# 如果未使用特定触发器，可以在此处禁用。性能提升很小，但如果你需要，它就在这里。
+Disabled_Trigger_Checks:
+  In_Midair: false # 空中
+  Standing_And_Walking: false # 站立和行走
+  Jump: false # 跳跃
+  Double_Jump: true # Disabled by default since this allows players to do slight double jump and go over 2 blocks
+  Swim: false # 游泳
+  Glide: false # 滑翔
+  Sneak: false # 潜行
+  Sprint: false # 疾跑
+  Right_And_Left_Click: false # 右键和左键
+  Drop_Item: false # 丢弃物品
+  Swap_Hand_Items: false # 交换手物品
+
+# 定义子弹转换检查之间的延迟。每当玩家尝试重新装填武器时，都会发生检查。如果玩家在延迟内多次尝试重新装填，转换检查只会触发一次。这意味着
+# 你的武器 *可能* 不会完全填满，*一些* 子弹可能不会被消耗。
+Milliseconds_Between_Ammo_Conversions: 8000
+
+# 设置为 true 允许创造模式玩家射击需要子弹的武器而无需消耗子弹。请注意：这可能会让你感到困惑，为什么子弹在测试中不起作用！请仅在了解风险的情况下设置此选项。
+Creative_Mode_Bypass_Ammo: false
+
+# 定义武器后坐力平滑度。较低的值意味着更平滑的后坐力，但发送的包更多。在默认的 Minecraft 中，这个值为 50（1 刻）。在 WeaponMechanics 中，它可以更低。建议使用 5 的倍数。
+Recoil_Millis_Between_Rotations: 20
+
+# 定义用于假实体的新玩家检查率。例如，假实体用于投射物。使用刻度，20 刻度 = 1 秒。
+Check_For_New_Player_Rate: 50
+
+# 如果设置为 true，伤害衰减将均匀地随距离变化。
+# 有关更多信息，请参阅 https://github.com/WeaponMechanics/MechanicsMain/issues/100。
+Smooth_Damage_Dropoff: false
+
+# 设置为 true 将禁用与使用 EntityExplodeEvent 的插件的兼容性。您可能需要这样做，如果您自己处理兼容性。
+Disable_Entity_Explode_Event: false
+Disable_Block_Break_Event: false
+
+# Having `Strict_Relative_Skins: true` makes it so when you are creating skin configs
+# using the 'ADD x' feature, WeaponMechanics will strictly make sure you follow
+# the suggested format. Disabling this makes it much easier for you to make mistakes.
+Strict_Relative_Skins: true
+
+# 这些选项定义爆炸的“随机性”。它不影响方块重生。这些效果在较大的爆炸中看起来不太好看，但它们改善了较小的爆炸。
+Explosions:
+  Attempt_Copy_Data: false  # 使用方块掩码时，是否尝试复制数据（如方块连接）
+  Cuboid:
+    Noise_Chance: 0.20
+    Noise_Distance: 1.0
+  Parabolic:
+    Noise_Chance: 0.25
+    Noise_Distance: 1.25
+  Spherical:
+    Noise_Chance: 0.10
+    Noise_Distance: 1.0
+
+# 这些是用于各种武器状态的符号。
+Placeholder_Symbols:
+  REVOLVER:
+    Open: " □"
+    Close: " ■"
+  PUMP:
+    Open: " □"
+    Close: " ■"
+  LEVER:
+    Open: " □"
+    Close: " ■"
+  SLIDE:
+    Open: " □"
+    Close: " ■"
+  Reload: "<red>ᴿ"
+  Selective_Fire:
+    SINGLE: "S"
+    BURST: "B"
+    AUTO: "A"
+  Dual_Wield:
+    Split: " <gray>| "
+
+    # 这两个实际上不是占位符符号，但当武器没有在 Weapon_Info_Display 中定义 Dual_Wield 部分时使用。
+    Main_Hand: "<gold><ammo_left><gray>»<gold><reload> <gold><firearm_state><weapon_title>"
+    Off_Hand: "<gold><weapon_title><firearm_state> <gold><reload><gray>«<gold><ammo_left>"
+
+# 这是全局伤害系统。它定义了子弹如何对具有药水效果、盔甲和其他状态的实体造成伤害。
+Damage:
+
+  # 忽略盔甲架有助于与其他插件的兼容性。
+  # 为了获得最佳兼容性，请将所有这些设置为 true。如果您想能够伤害盔甲架，请将它们设置为 false。
+  Ignore_Armor_Stand:
+    Marker: true
+    Invisible: true
+    Always: true
+
+  # 64 是 Minecraft 使用的值，但您可以使用较小的值，如果您担心性能。0 将禁用末影人传送。
+  Enderman_Teleport_Attempts: 64
+
+  # 使用 ´Use_Vanilla_Damaging´ 您可以禁用 WeaponMechanics
+  # 自定义伤害系统，并使用原版。您只需将此设置为 true，如果您与其他插件存在兼容性问题。
+  # 兼容性问题可能与使用自定义盔甲的插件有关。
+  #
+  # 这意味着如果 ´Use_Vanilla_Damaging: true´:
+  # 1) Vanilla damaging system is used
+  # 2) You can't customize the damaging using this section
+  # 3) Vanilla knockback happens on hit
+  # 4) Weapon's Damage.Armor_Damage option is ignored
+  # 5) Attachments from WeaponMechanicsPlus will not work
+  Use_Vanilla_Damaging: false
+
+  Damage_Modifiers:
+    Min: 20%   # 子弹将始终造成至少 0% 的基础伤害
+    Max: 200%  # 子弹将，在最大值时，造成 300% 的基础伤害
+    #默认
+    #- Min: 0%
+    #- Max: 300%
+
+    # 盔甲修改器... 为了简单起见，我建议只更改 'Per_Armor_Point'。
+    # 这将确保您与对物品属性的更改保持兼容。
+    Per_Armor_Point: -3%
+    Armor: []
+      #- IRON_HELMET -5%
+    Enchantments:
+      - projectile_protection -8%
+      - protection -4%
+
+    # Modifiers for where the bullet hits the body
+    Head: +50%
+    Body: +0%
+    Arms: -20%
+    Legs: -20%
+    Feet: -50%
+    Back: +20%
+
+    # Moving targets are not braced for impact
+    Sneaking: -5%
+    Walking: +0%
+    Swimming: +5%
+    Sprinting: +5%
+    In_Midair: +5%
+
+    Shielding: -500% # Basically completely negates damage
+
+    # Change the damage per entity type. Good for PVE type servers that
+    # want "a little bit" of friendly fire.
+    Entities: []
+      #- ZOMBIE +50%
+      #- PLAYER -50%
+
+    Potions: []
+      #- weakness +10%
+
+  Explosion:
+    Damage_Modifiers:
+      Min: 5%   # Explosions will always do at least 5% of their base damage
+      Max: 120%  # Explosions will, at a max, do 120% of their base damage
+
+      Per_Armor_Point: -3%
+      Enchantments:
+        - blast_protection -8%
+        - protection -4%
+
+      # Moving targets are not braced for impact
+      Sneaking: -10%
+      Walking: +0%
+      Swimming: +5%
+      Sprinting: +5%
+      In_Midair: +10%
+
+      Shielding: -500% # Basically completely negates damage
+
+
+
+# These values are used internally for figuring out headshots, bodyshots, etc.
+# Changing these values effectively allow you to decide how big a head hitbox
+# (and other hitboxes) are.
+#
+# To see a visual representation of the hitboxes, use /wm test hitbox
+Entity_Hitboxes:
+  ELDER_GUARDIAN:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 1.0
+    ARMS: false
+    LEGS: 0.0
+    FEET: 0.0
+  WITHER_SKELETON:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.375
+    ARMS: true
+    LEGS: 0.25
+    FEET: 0.125
+  STRAY:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.375
+    ARMS: true
+    LEGS: 0.25
+    FEET: 0.125
+  HUSK:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.375
+    ARMS: true
+    LEGS: 0.25
+    FEET: 0.125
+  ZOMBIE_VILLAGER:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.55
+    ARMS: true
+    LEGS: 0.125
+    FEET: 0.075
+  SKELETON_HORSE:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.5
+    ARMS: false
+    LEGS: 0.4
+    FEET: 0.1
+  ZOMBIE_HORSE:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.5
+    ARMS: false
+    LEGS: 0.4
+    FEET: 0.1
+  ARMOR_STAND:
+    Horizontal_Entity: false
+    HEAD: 0.0
+    BODY: 0.5
+    ARMS: true
+    LEGS: 0.35
+    FEET: 0.15
+  DONKEY:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.5
+    ARMS: false
+    LEGS: 0.4
+    FEET: 0.1
+  MULE:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.5
+    ARMS: false
+    LEGS: 0.4
+    FEET: 0.1
+  EVOKER:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.55
+    ARMS: true
+    LEGS: 0.125
+    FEET: 0.075
+  VEX:
+    Horizontal_Entity: false
+    HEAD: 0.3
+    BODY: 0.4
+    ARMS: true
+    LEGS: 0.2
+    FEET: 0.1
+  VINDICATOR:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.475
+    ARMS: true
+    LEGS: 0.2
+    FEET: 0.075
+  ILLUSIONER:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.55
+    ARMS: true
+    LEGS: 0.125
+    FEET: 0.075
+  CREEPER:
+    Horizontal_Entity: false
+    HEAD: 0.3
+    BODY: 0.45
+    ARMS: false
+    LEGS: 0.2
+    FEET: 0.05
+  SKELETON:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.375
+    ARMS: true
+    LEGS: 0.25
+    FEET: 0.125
+  SPIDER:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 1.0
+    ARMS: true #Arms ARE the legs
+    LEGS: 0.0
+    FEET: 0.0
+  GIANT:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.375
+    ARMS: true
+    LEGS: 0.25
+    FEET: 0.125
+  ZOMBIE:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.375
+    ARMS: true
+    LEGS: 0.25
+    FEET: 0.125
+  SLIME:
+    Horizontal_Entity: false
+    HEAD: 0.0
+    BODY: 1.0
+    ARMS: false
+    LEGS: 0.0
+    FEET: 0.0
+  GHAST: # Tentacles aren't part of hitbox
+    Horizontal_Entity: false
+    HEAD: 1.0
+    BODY: 0.0
+    ARMS: false
+    LEGS: 0.0
+    FEET: 0.0
+  PIG_ZOMBIE:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.375
+    ARMS: true
+    LEGS: 0.25
+    FEET: 0.125
+  ENDERMAN:
+    Horizontal_Entity: false
+    HEAD: 0.2
+    BODY: 0.25
+    ARMS: true
+    LEGS: 0.5
+    FEET: 0.05
+  CAVE_SPIDER:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 1.0
+    ARMS: true
+    LEGS: 0.0 # Basically, the arms are now the legs.
+    FEET: 0.0
+  SILVERFISH:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 1.0
+    ARMS: false
+    LEGS: 0.0
+    FEET: 0.0
+  BLAZE:
+    Horizontal_Entity: false
+    HEAD: 0.335
+    BODY: 0.335
+    ARMS: false
+    LEGS: 0.33 # Legs go under blaze as well -- weird hitbox
+    FEET: 0.0
+  MAGMA_CUBE:
+    Horizontal_Entity: false
+    HEAD: 0.0
+    BODY: 1.0
+    ARMS: false
+    LEGS: 0.0
+    FEET: 0.0
+  ENDER_DRAGON: # Consider whole ender dragon as body due to how it's hitboxes are constructed
+    Horizontal_Entity: false
+    HEAD: 0.0
+    BODY: 1.0
+    ARMS: false
+    LEGS: 0.0
+    FEET: 0.0
+  WITHER:
+    Horizontal_Entity: false
+    HEAD: 0.365
+    BODY: 0.335
+    ARMS: false
+    LEGS: 0.15
+    FEET: 0.15
+  BAT:
+    Horizontal_Entity: false
+    HEAD: 0.0
+    BODY: 1.0
+    ARMS: false
+    LEGS: 0.0
+    FEET: 0.0
+  WITCH:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.55
+    ARMS: true
+    LEGS: 0.125
+    FEET: 0.075
+  ENDERMITE:
+    Horizontal_Entity: false
+    HEAD: 0.0
+    BODY: 1.0
+    ARMS: false
+    LEGS: 0.0
+    FEET: 0.0
+  GUARDIAN:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 1.0
+    ARMS: false
+    LEGS: 0.0
+    FEET: 0.0
+  SHULKER:
+    Horizontal_Entity: false
+    HEAD: 0.0
+    BODY: 1.0
+    ARMS: false
+    LEGS: 0.0
+    FEET: 0.0
+  PIG:
+    Horizontal_Entity: true
+    HEAD: 0
+    BODY: 0.625
+    ARMS: false
+    LEGS: 0.25
+    FEET: 0.125
+  SHEEP:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.55
+    ARMS: false
+    LEGS: 0.225
+    FEET: 0.225
+  COW:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.5
+    ARMS: false
+    LEGS: 0.45
+    FEET: 0.05
+  CHICKEN:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.6
+    ARMS: true # wings
+    LEGS: 0.35
+    FEET: 0.05
+  SQUID:
+    Horizontal_Entity: false
+    HEAD: 0.0
+    BODY: 1.0
+    ARMS: false
+    LEGS: 0.0
+    FEET: 0.0
+  WOLF:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.5
+    ARMS: false
+    LEGS: 0.4
+    FEET: 0.1
+  MUSHROOM_COW:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.5
+    ARMS: false
+    LEGS: 0.45
+    FEET: 0.05
+  SNOWMAN:
+    Horizontal_Entity: false
+    HEAD: 0.34
+    BODY: 0.31
+    ARMS: true # Very tiny arms
+    LEGS: 0.35
+    FEET: 0.0
+  OCELOT:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.65
+    ARMS: false
+    LEGS: 0.3
+    FEET: 0.05
+  IRON_GOLEM:
+    Horizontal_Entity: false
+    HEAD: 0.225
+    BODY: 0.425
+    ARMS: true
+    LEGS: 0.3
+    FEET: 0.05
+  HORSE:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.5
+    ARMS: false
+    LEGS: 0.4
+    FEET: 0.1
+  RABBIT:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.45
+    ARMS: false
+    LEGS: 0.45
+    FEET: 0.1
+  POLAR_BEAR:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.6
+    ARMS: false
+    LEGS: 0.3
+    FEET: 0.1
+  LLAMA:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.55
+    ARMS: false
+    LEGS: 0.35
+    FEET: 0.1
+  PARROT:
+    Horizontal_Entity: false
+    HEAD: 0.4
+    BODY: 0.4
+    ARMS: true # wings
+    LEGS: 0.1
+    FEET: 0.1
+  VILLAGER:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.55
+    ARMS: true
+    LEGS: 0.125
+    FEET: 0.075
+  TURTLE:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.7
+    ARMS: true # flippers
+    LEGS: 0.3
+    FEET: 0.0
+  PHANTOM:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 1.0
+    ARMS: true # wings
+    LEGS: 0.0
+    FEET: 0.0
+  COD:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 1.0
+    ARMS: false
+    LEGS: 0.0
+    FEET: 0.0
+  SALMON:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 1.0
+    ARMS: false
+    LEGS: 0.0
+    FEET: 0.0
+  PUFFERFISH:
+    Horizontal_Entity: false
+    HEAD: 1.0
+    BODY: 0.0
+    ARMS: false
+    LEGS: 0.0
+    FEET: 0.0
+  TROPICAL_FISH:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 1.0
+    ARMS: false
+    LEGS: 0.0
+    FEET: 0.0
+  DROWNED:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.375
+    ARMS: true
+    LEGS: 0.25
+    FEET: 0.125
+  DOLPHIN:
+    Horizontal_Entity: true
+    HEAD: 0
+    BODY: 1.0
+    ARMS: false
+    LEGS: 0
+    FEET: 0
+  CAT:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.65
+    ARMS: false
+    LEGS: 0.3
+    FEET: 0.05
+  PANDA:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.6
+    ARMS: false
+    LEGS: 0.3
+    FEET: 0.1
+  PILLAGER:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.55
+    ARMS: true
+    LEGS: 0.125
+    FEET: 0.075
+  RAVAGER:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.5
+    ARMS: true # Long legs
+    LEGS: 0.4
+    FEET: 0.1
+  TRADER_LLAMA:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.55
+    ARMS: false
+    LEGS: 0.35
+    FEET: 0.1
+  WANDERING_TRADER:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.55
+    ARMS: true
+    LEGS: 0.125
+    FEET: 0.075
+  FOX:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.6
+    ARMS: false
+    LEGS: 0.3
+    FEET: 0.1
+  BEE:
+    Horizontal_Entity: false
+    HEAD: 0.0
+    BODY: 0.925
+    ARMS: true
+    LEGS: 0.05
+    FEET: 0.025
+  PLAYER:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.375
+    ARMS: true
+    LEGS: 0.25
+    FEET: 0.125
+  ZOMBIFIED_PIGLIN:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.375
+    ARMS: true
+    LEGS: 0.25
+    FEET: 0.125
+  PIGLIN:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.375
+    ARMS: true
+    LEGS: 0.25
+    FEET: 0.125
+  STRIDER:
+    Horizontal_Entity: false
+    HEAD: 0.0
+    BODY: 0.5
+    ARMS: false
+    LEGS: 0.3
+    FEET: 0.2
+  HOGLIN:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.6
+    ARMS: false
+    LEGS: 0.35
+    FEET: 0.05
+  ZOGLIN:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.6
+    ARMS: false
+    LEGS: 0.35
+    FEET: 0.05
+  PIGLIN_BRUTE:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.375
+    ARMS: true
+    LEGS: 0.25
+    FEET: 0.125
+  AXOLOTL:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.65
+    ARMS: false
+    LEGS: 0.35
+    FEET: 0.0
+  GLOW_SQUID:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 1.0
+    ARMS: false
+    LEGS: 0.0
+    FEET: 0.0
+  GOAT:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.6
+    ARMS: false
+    LEGS: 0.3
+    FEET: 0.1
+  ALLAY:
+    Horizontal_Entity: false
+    HEAD: 0.5
+    BODY: 0.3
+    ARMS: true
+    LEGS: 0.1
+    FEET: 0.1
+  TADPOLE:
+    Horizontal_Entity: false
+    HEAD: 0.0
+    BODY: 1.0
+    ARMS: false
+    LEGS: 0.0
+    FEET: 0.0
+  WARDEN:
+    Horizontal_Entity: false
+    HEAD: 0.3
+    BODY: 0.45
+    ARMS: true
+    LEGS: 0.15
+    FEET: 0.1
+  FROG:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.9
+    ARMS: true
+    LEGS: 0.05
+    FEET: 0.05
+  CAMEL:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.5
+    ARMS: true
+    LEGS: 0.45
+    FEET: 0.05
+  SNIFFER:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.95
+    LEGS: 0.0
+    FEET: 0.05
+  BREEZE:
+    HEAD: 0.1
+    BODY: 0.8
+    LEGS: 0.075
+    FEET: 0.025
+  MOOSHROOM:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.5
+    ARMS: false
+    LEGS: 0.45
+    FEET: 0.05
+  SNOW_GOLEM:
+    Horizontal_Entity: false
+    HEAD: 0.34
+    BODY: 0.31
+    ARMS: true # Very tiny arms
+    LEGS: 0.35
+    FEET: 0.0
+  ARMADILLO:
+    Horizontal_Entity: true
+    HEAD: 0.0
+    BODY: 0.8
+    ARMS: false
+    LEGS: 0.15
+    FEET: 0.05
+  BOGGED:
+    Horizontal_Entity: false
+    HEAD: 0.25
+    BODY: 0.375
+    ARMS: true
+    LEGS: 0.25
+    FEET: 0.125

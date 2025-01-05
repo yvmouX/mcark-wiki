@@ -1,0 +1,42 @@
+universal_gun_repair_kit:
+  Total_Durability: 1000
+  Override_Max_Durability_Loss: 500
+  Consume_On_Use: false
+  Blacklist: true
+  Weapons:
+    - Combat_Knife 
+  Item:
+    Type: IRON_INGOT
+    Name: "<yellow>通用枪械修复工具"
+    Lore:
+      - "<gray>将其拖放到武器上以修复它"
+      - "<gray>可用耐久度：<red><durability>"
+      - "<gray>修复时武器耐久损失：<red>500"
+melee_repair_kit:
+  Total_Durability: 10
+  Consume_On_Use: true
+  Blacklist: false
+  Weapons:
+    - Combat_Knife 
+  Item:
+    Type: IRON_INGOT
+    Name: "<yellow>通用近战修复工具"
+    Lore:
+      - "<gray>将其拖放到武器上以修复它"
+      - "<gray>修复耐久：<red><durability>"
+      - ""
+      - "<red>一次性修复工具"
+universal_weapon_repair_kit:
+  Total_Durability: 1000
+  Override_Max_Durability_Loss: 500
+  Consume_On_Use: false
+  Blacklist: true
+  Weapons:
+    - Combat_Knife 
+  Item:
+    Type: IRON_INGOT
+    Name: "<yellow>通用武器修复工具"
+    Lore:
+      - "<gray>将其拖放到武器上以修复它"
+      - "<gray>可用耐久度：<red><durability>"
+      - "<gray>修复时武器耐久损失：<red>500"

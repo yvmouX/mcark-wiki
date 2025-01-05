@@ -1,0 +1,34 @@
+Stim:
+  Info:
+    Weapon_Item:
+      Type: "LIGHTNING_ROD" 
+      Name: "<gold>医疗药剂"
+      Lore:
+        - "<gray>恢复大量生命值"
+        - ""
+        - "<gray>治疗量"
+        - "<gold>➣ &c♥♥♥♥♥♥♥♥ <gold>⟸"
+      # 这三项全部保持默认即可
+      Unbreakable: true 
+      Hide_Flags: true 
+      Deny_Use_In_Crafting: true 
+    Weapon_Get_Mechanics:
+      - "Sound{sound=ITEM_ARMOR_EQUIP_CHAIN, pitch=0.75}" 
+    Cancel:
+      Block_Interactions: true 
+      Item_Interactions: true 
+  Skin:
+    Default:
+      Type: FEATHER 
+      Custom_Model_Data: -1  
+  Shoot:
+    Trigger:
+      Main_Hand: "RIGHT_CLICK" 
+      Off_Hand: "RIGHT_CLICK" 
+      Circumstance: # 游泳时是否禁止使用，默认为否
+        Swimming: "DENY" 
+    Consume_Item_On_Shoot: true # 使用后消耗物品
+    Delay_Between_Shots: 20 # 使用间隔时间（tick）
+    Mechanics: # 更多查看官方wiki：https://cjcrafter.gitbook.io/mechanics
+      - "Sound{sound=ENTITY_GENERIC_DRINK, noise=0.1}" # 使用时播放的音效
+      - "Potion{potion=HEAL, level=3, time=1}" # 使用时给予的药水效果，time的单位为tick，20tick=1s

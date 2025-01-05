@@ -1,0 +1,190 @@
+# 每个模板前的废话：
+# .....
+Kar98k:
+  Info:
+    Weapon_Item:
+      Type: "FEATHER"
+      Name: "<gold>Kar98k"
+      Lore:
+        - "<gray>一把大栓"
+        - "弹药:<gray> 7.62mm 子弹"
+        - ""
+        - "<gold>基础伤害➣<gray> 13"
+        - "<gold>最大耐久➣<gray> 100"
+        - ""  
+        - "<gold>按Q装填"
+      Unbreakable: true
+      Hide_Flags: true
+      Attributes:
+        - "GENERIC_MOVEMENT_SPEED -0.0243"
+      Deny_Use_In_Crafting: true
+    Weapon_Info_Display:
+      Action_Bar:
+        Message: "<gold>Kar98k<firearm_state> <gray>«<gold><ammo_left><gray>»<gold><reload>"
+    Weapon_Get_Mechanics:
+      - "Sound{sound=ITEM_ARMOR_EQUIP_CHAIN, pitch=0.75, listeners=Source{}}"
+    Weapon_Equip_Delay: 35
+    Cancel:
+      Drop_Item: true
+      Swap_Hands: true 
+      Arm_Swing_Animation: true
+      Break_Blocks: true 
+  Skin:
+    Default: 10
+    Scope: ADD 1000
+    Sprint: ADD 2000
+  Projectile: 
+    Projectile_Settings:
+      Type: "INVISIBLE"
+      Minimum:
+        Speed: 140
+      Gravity: 9.8
+      Drag:
+        Base: 0.99
+        In_Water: 0.96
+        When_Raining_Or_Snowing: 0.98
+    Through:
+      Maximum_Through_Amount: 3
+      Blocks:
+        Default_Speed_Multiplier: 0.7
+        Whitelist: true
+        List:
+          - "$GLASS"
+          - "$LEAVES"
+      Entities:
+        Allow_Any: true
+        Default_Speed_Multiplier: 0.6
+  Shoot:
+    Trigger:
+      Main_Hand: "RIGHT_CLICK"
+      Off_Hand: "RIGHT_CLICK"
+      Circumstance:
+        Swimming: "DENY"
+        Sprinting: "DENY"
+        Dual_Wielding: "DENY"
+    Projectile_Speed: 220
+    Delay_Between_Shots: 18
+    Spread:
+      Base_Spread: 3
+      Modify_Spread_When:
+        Zooming: 20%
+        Sneaking: 50%
+        In_Midair: 150%
+    Recoil:
+      Push_Time: 200
+      Recover_Time: 200
+      Horizontal:
+        - 8.2
+      Vertical:
+        - 8.2
+      Modify_Recoil_When:
+        Zooming: 10%
+        Sneaking: 50%
+        In_Midair: 150%
+    Mechanics:
+      - "CustomSound{sound=shoot.kar98k.loud, volume=6, noise=0.1}"
+    Custom_Durability:
+      Max_Durability: 100 # 最大耐久
+      Min_Max_Durability: 0 # 最小最大耐久，意味着在你一遍又一遍地不断修理武器之后，最大耐久永远不会低于这个值
+      #Lose_Max_Durability_Per_Repair: 500 # 每次修复损失的最大耐久。该项在修复工具中已经设置，所以这里不需要设置
+      Durability_Per_Shot: 1 # 每次射击耐久损失
+      Chance_To_Lose: 100% # 每次射击耐久损失的概率
+      Broken_Item: 
+        Type: IRON_SHOVEL
+        Name: "<red>损坏的Kar98k"
+        Lore: 
+          - ""
+          - "看来需要修理一下了"
+      #Repair_Items:
+      #  - "universal_gun_repair_kit" # 修复工具，默认通用修复工具。您不需要修改它，只需要说明添加注释说明您需要的修复工具的属性，我们会根据您的注释进行修改。
+      # 保持默认即可
+      Break_Mechanics:
+        - "Sound{sound=ENTITY_ITEM_BREAK}"
+      Repair_Mechanics:
+        - "Sound{sound=BLOCK_ANVIL_USE}"
+      Deny_Repair_Mechanics:
+        - "Sound{sound=ENTITY_VILLAGER_NO}"
+        - "ActionBar{message=<red>Cannot repair item any more}"
+  Reload:
+    Trigger:
+      Main_Hand: "DROP_ITEM"
+      Off_Hand: "DROP_ITEM"
+    Magazine_Size: 5
+    Reload_Duration: 66
+    Ammo:
+      Ammos: 
+        - 7-62
+    Start_Mechanics:
+      - "CustomSound{sound=reload.start.normal, volume=0.5, noise=0.1}"
+    Finish_Mechanics:
+      - "CustomSound{sound=reload.end.normal, volume=0.5, noise=0.1}"
+  Damage:
+    Base_Damage: 13
+    Armor_Damage: 15
+  Scope:
+    Trigger:
+      Main_Hand: "LEFT_CLICK"
+      Off_Hand: "LEFT_CLICK"
+    Zoom_Amount: 1.5
+    Shoot_Delay_After_Scope: 16
+    Mechanics:
+      - "CustomSound{sound=scope.in, volume=0.5, noise=0.1, listeners=Source{}}"
+    Zoom_Off:
+      Mechanics:
+        - "CustomSound{sound=scope.out, volume=0.5, noise=0.1, listeners=Source{}}"
+    Zoom_Stacking:
+      Stacks:
+        - 3.0
+      Mechanics:
+        - "CustomSound{sound=scope.in, volume=0.5, noise=0.1}"
+  Firearm_Action:
+    Type: "LEVER"
+    Open:
+      Time: 9
+      Mechanics:
+        - "Sound{sound=BLOCK_NOTE_BLOCK_HAT, volume=0.5, noise=0.1, listeners=Source{}}"
+        - "Sound{sound=BLOCK_PISTON_CONTRACT, volume=0.5, noise=0.1, listeners=Source{}, delayBeforePlay=2}"
+    Close:
+      Time: 9
+      Mechanics:
+        - "Sound{sound=BLOCK_PISTON_EXTEND, volume=0.5, noise=0.1, listeners=Source{}}"
+
+  # The following options are added by WeaponMechanicsCosmetics, and you will
+  # not see the changes take effect until you purchase it.
+
+  Cosmetics:
+    Muzzle_Flash: true
+    Splash_Mechanics:
+      - "Sound{sound=ENTITY_GENERIC_SPLASH, pitch=1.85, noise=0.15} @Target{}"
+      - "Particle{particle=WATER_SPLASH, count=20, noise=0.2 0.2 0.2} @Target{}"
+    Bullet_Zip:
+      Maximum_Distance: 4.0
+      Sounds:
+        - "CustomSound{sound=fx.whiz, noise=0.02, listeners=Target{}} @Target{}"
+    Crossbow:
+      Only_When_Scoping: false
+
+  Trail:
+    Distance_Between_Particles: 0.3
+    Particle_Chooser: LOOP
+    Particles:
+      - "Particle{particle=DUST_COLOR_TRANSITION, color=RED, fadeColor=YELLOW, size=0.4}"
+
+  Show_Time:
+    Reload:
+      Item_Cooldown: true
+      Exp: true
+      Action_Bar: "<gray>Reloading <bar> <gray><time>s"
+      Action_Bar_Cancelled: "<red>Reload Cancelled"
+      Bar:
+        Left_Color: "<gray>"
+        Right_Color: "<red>"
+        Left_Symbol: "|"
+        Right_Symbol: "|"
+        Symbol_Amount: 5
+    Weapon_Equip_Delay:
+      Item_Cooldown: true
+    Firearm_Actions:
+      Item_Cooldown: true
+    Shoot_Delay_After_Scope:
+      Item_Cooldown: true

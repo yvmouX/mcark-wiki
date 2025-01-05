@@ -1,0 +1,122 @@
+Airattack_II:
+  Info:
+    Weapon_Item:
+      Type: "REDSTONE_BLOCK"
+      Name: "<gold>精准打击II"
+      Lore:
+        - "<gray>使用1枚1000磅炸弹打击指定位置"
+        - "<gray>可能有哑弹"
+        - ""
+        - "<gold>➣<gray> 1 <gold> 次轰炸"
+        - "<gold>➣每次 <gray> 1 <gold> 枚炸弹"
+        - "<gold>➣爆炸半径 <gray> 30 <gold>"
+        - ""
+        - "不知这枚炸弹会落到谁的头上..."
+        - "不管是谁，等待他的将是死亡"
+      Enchantments: 
+        - FIRE_ASPECT 1
+      Unbreakable: true
+      Hide_Flags: true
+      Deny_Use_In_Crafting: true
+    Weapon_Get_Mechanics:
+      - "Sound{sound=ITEM_ARMOR_EQUIP_CHAIN, pitch=0.75}"
+    Cancel:
+      Block_Interactions: true
+      Item_Interactions: true
+  Projectile:
+    Projectile_Settings:
+      Type: "DROPPED_ITEM"
+      Projectile_Item_Or_Block:
+        Type: "REDSTONE_TORCH"
+      Disable_Entity_Collisions: true
+    # 弹跳
+    Bouncy:
+      Maximum_Bounce_Amount: -1 # 最大弹跳次数，默认-1就是无限
+      Blocks:
+        Allow_Any: true
+        Default_Speed_Multiplier: 0.6 # 默认速度衰减
+      Rolling:
+        Required_Motion_To_Start_Rolling: 5
+        Blocks:
+          Allow_Any: true
+          Default_Speed_Multiplier: 0.9
+          List:
+            - "$_ICE-0.99"
+            - "ICE-0.99"
+    Mechanics:
+      - "Sound{sound=ENTITY_ENDER_DRAGON_GROWL, volume=10, pitch=1, delayBeforePlay=10} ?Range{max=500}"
+      - "Sound{sound=ENTITY_WITHER_SPAWN, volume=6, pitch=1, delayBeforePlay=100} ?Range{max=400}"
+      - "Message{message=<dark_red><bold>精准打击已就绪！} @World{} ?Range{max=500}"
+      - "Message{message=<aqua>坐标：x\\=<target_x> z\\=<target_z>} @World{} ?Range{max=500}"
+  Shoot:
+    Trigger:
+      Main_Hand: "RIGHT_CLICK"
+      Off_Hand: "RIGHT_CLICK"
+      Circumstance:
+        Swimming: "DENY"
+    Projectile_Speed: 36
+    Delay_Between_Shots: 10
+    Consume_Item_On_Shoot: true
+    Mechanics:
+      - "Sound{sound=ENTITY_EGG_THROW, volume=0.5, noise=0.1}"
+  Damage:
+    Base_Explosion_Damage: 50.0
+    Fire_Ticks: 60
+    Armor_Damage: 100
+    Mechanics:
+      - "Potion{potion=CONFUSION, time=200, level=3, particles=HIDE} @Target{}"
+  Explosion:
+    Knockback_Multiplier: 1.0
+    Explosion_Exposure: "DISTANCE"
+    Explosion_Shape: "SPHERE"
+    Explosion_Type_Data:
+      Radius: 25
+    Detonation:
+      Delay_After_Impact: 100
+      Remove_Projectile_On_Detonation: true
+      Impact_When:
+        Spawn: true
+    Airstrike:
+      Dropped_Projectile:
+        Projectile_Settings:
+          Type: "PRIMED_TNT"
+        Disable_Entity_Collisions: true
+      Minimum_Bombs: 1
+      Maximum_Bombs: 1
+      Height: 120
+      Vertical_Randomness: 0
+      Distance_Between_Bombs: 0
+      Maximum_Distance_From_Center: 0
+      Layers: 1
+      Delay_Between_Layers: 30
+      Detonation:
+        Impact_When:
+          Block: true
+    Block_Damage:
+      Spawn_Falling_Block_Chance: 0
+      Default_Mode: BREAK
+      Blocks:
+        - "BEDROCK cancel"
+        - "$WATER cancel"  # stationary_water and moving_water
+        - "OBSIDIAN cancel"
+        - "$LAVA cancel"  # stationary_lava and moving_lava
+    Regeneration:
+      Ticks_Before_Start: 100
+      Max_Blocks_Per_Update: 5
+      Ticks_Between_Updates: 5
+    Mechanics:
+      - "CustomSound{sound=explosion.frag, volume=6, noise=0.1} @Target{}"
+
+  # The following options are added by WeaponMechanicsCosmetics, and you will
+  # not see the changes take effect until you purchase it.
+
+  Cosmetics:
+    Splash_Mechanics:
+      - "Sound{sound=ENTITY_GENERIC_SPLASH, pitch=1.85, noise=0.15} @Target{}"
+      - "Particle{particle=WATER_SPLASH, count=20, noise=0.2 0.2 0.2} @Target{}"
+
+  Trail:
+    Distance_Between_Particles: 0.3
+    Particle_Chooser: LOOP
+    Particles:
+      - "Particle{particle=FLAME}"

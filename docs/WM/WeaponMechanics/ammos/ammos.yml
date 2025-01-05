@@ -1,0 +1,84 @@
+7-62:
+  Item_Ammo:
+    Bullet_Item:
+      Type: IRON_NUGGET
+#      Custom_Model_Data: 2  # Use custom model data if you want to use a custom texture for the ammo
+      Name: "<red>7.62mm 子弹"
+      Lore:
+        - "<gray>伤害极高的弹药"
+    Ammo_Converter_Check: # 弹药转换检查
+      Type: true
+      Name: true
+      Lore: true
+      Enchants: true
+      Custom_Model_Data: false
+7-92:
+  Item_Ammo:
+    Bullet_Item:
+      Type: IRON_NUGGET
+#      Custom_Model_Data: 2  # Use custom model data if you want to use a custom texture for the ammo
+      Name: "<red>7.92mm 子弹"
+      Lore:
+        - "<gray>伤害极高的弹药"
+    Ammo_Converter_Check: # 弹药转换检查
+      Type: true
+      Name: true
+      Lore: true
+      Enchants: true
+      Custom_Model_Data: false
+5-56:
+  Item_Ammo:
+    Bullet_Item:
+      Type: IRON_NUGGET
+#      Custom_Model_Data: 2  # Use custom model data if you want to use a custom texture for the ammo
+      Name: "<red>5.56mm 子弹"
+      Lore:
+        - "<gray>伤害极高的弹药"
+    Ammo_Converter_Check: # 弹药转换检查
+      Type: true
+      Name: true
+      Lore: true
+      Enchants: true
+      Custom_Model_Data: false
+50mm:
+  Item_Ammo:
+    Bullet_Item:
+      Type: GOLD_NUGGET
+#      Custom_Model_Data: 2  # Use custom model data if you want to use a custom texture for the ammo
+      Name: "<red>.50 BMG"
+      Lore:
+        - "<gray>伤害极高的弹药"
+    Ammo_Converter_Check: # 弹药转换检查
+      Type: true
+      Name: true
+      Lore: true
+      Enchants: true
+      Custom_Model_Data: false
+357_M:
+  Item_Ammo:
+    Bullet_Item:
+      Type: IRON_NUGGET
+#      Custom_Model_Data: 2  # Use custom model data if you want to use a custom texture for the ammo
+      Name: "<red>马格南手枪弹"
+      Lore:
+        - "<gray>沙鹰同款"
+    Ammo_Converter_Check: # 弹药转换检查
+      Type: true
+      Name: true
+      Lore: true
+      Enchants: true
+      Custom_Model_Data: false
+rocket:
+  Item_Ammo:
+    Bullet_Item:
+      Type: FIREWORK_ROCKET
+#      Custom_Model_Data: 2  # Use custom model data if you want to use a custom texture for the ammo
+      Name: "<red>高爆火箭弹"
+      Lore:
+        - "<gray>可以装填进RPG-7中"
+    Ammo_Converter_Check: # 弹药转换检查
+      Type: true
+      Name: true
+      Lore: true
+      Enchants: true
+      Custom_Model_Data: false

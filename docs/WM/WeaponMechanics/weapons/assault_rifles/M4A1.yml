@@ -1,0 +1,198 @@
+M4A1:
+  Info:
+    Weapon_Item:
+      Type: "FEATHER"
+      Name: "<gold>M4A1"
+      Lore:
+        - "弹药:<gray> 5.56mm 全威力弹"
+        - ""
+        - "<gray>精度较高的全自动步枪"
+        - "<gray>适合中远距离战斗"
+        - ""
+        - "<gold>基础伤害➣<gray> 5"
+        - "<gold>最大耐久➣<gray> 500"
+        - ""
+        - "<gold>按Q装填"
+      Unbreakable: true
+      Hide_Flags: true
+      Attributes:
+        - "GENERIC_MOVEMENT_SPEED -0.0139"
+      Deny_Use_In_Crafting: true
+    Weapon_Info_Display:
+      Action_Bar:
+        Message: "<gold>M4A1<firearm_state> <gray>«<gold><ammo_left><gray>»<gold><reload>"
+    Weapon_Get_Mechanics:
+      - "Sound{sound=ITEM_ARMOR_EQUIP_CHAIN, pitch=0.75}"
+    Weapon_Equip_Delay: 30
+    Cancel:
+      Drop_Item: true # 禁止丢弃物品
+      Swap_Hands: true # 禁止使用 F 键交换主副手物品
+      Arm_Swing_Animation: true # 禁止手臂摆动动画
+      # 建议打开
+      Break_Blocks: true # 禁止破坏方块
+      Block_Interactions: true # 禁止与方块交互
+      Item_Interactions: true # 禁止与物品交互
+  Skin:
+    Default: 7
+    Scope: ADD 1000
+    Sprint: ADD 2000
+    Attachments:  # attachments will only work if you have purchased WeaponMechanicsPlus
+      Reflex_Sight: ADD 100000
+      Suppressor: ADD 1000000
+  Projectile: 
+    Projectile_Settings:
+      Type: "SNOWBALL"  
+      Gravity: 10 
+
+      Minimum:
+        Speed: 60 # 子弹飞行的最小速度
+        Remove_Projectile_On_Speed_Reached: true # 当子弹速度达到最小速度时，是否删除子弹
+      Drag: # 子弹飞行时的阻力
+        Base: 0.99
+        In_Water: 0.8
+        When_Raining_Or_Snowing: 0.95
+      Disable_Entity_Collisions: true # 是否禁用子弹与实体的碰撞
+      Maximum_Alive_Ticks: 600 # 子弹存在的最大时间
+      Maximum_Travel_Distance: 9999 # 子弹被删除之前可以移动的最大距离
+    
+    Through: # 子弹穿透方块
+      Maximum_Through_Amount: 2 # 子弹穿透方块的最大数量
+      Blocks:
+        Allow_Any: false # 是否允许子弹穿透所有方块，将覆盖Whitelist和List
+        Default_Speed_Multiplier: 0.8 # 子弹穿透方块时的速度乘的值，设置为负数给子弹减速
+        Whitelist: true # 是否使用白名单
+        List:
+          - "$GLASS"
+          - "$LEAVES"
+      Entities:
+        Allow_Any: true 
+        Default_Speed_Multiplier: 0.7 #
+  Shoot:
+    Trigger:
+      Main_Hand: "RIGHT_CLICK"
+      Off_Hand: "RIGHT_CLICK"
+      Circumstance:
+        Swimming: "DENY"
+        Sprinting: "DENY"
+        Dual_Wielding: "DENY"
+    Projectile_Speed: 80
+    Fully_Automatic_Shots_Per_Second: 14
+    Spread:
+      Base_Spread: 3.6
+      Modify_Spread_When:
+        Zooming: 50% # 瞄准时 Base_Spread 乘以 50%
+        Sneaking: 50% # 潜行时 Base_Spread 乘以 50%
+        In_Midair: 150% # 空中时 Base_Spread 乘以 150%
+    Recoil:
+      Push_Time: 200
+      Horizontal:
+        - 2.9
+        - 0
+      Vertical:
+        - 2.9
+      Modify_Recoil_When:
+        Zooming: 50% # 瞄准时降低后坐力
+        Sneaking: 50% # 瞄准时降低后坐力
+        In_Midair: 150% # 瞄准时降低后坐力
+    Mechanics:
+      - "CustomSound{sound=shoot.m4a1.loud, volume=6, noise=0.1}"
+    Custom_Durability:
+      Max_Durability: 500 # 最大耐久
+      Min_Max_Durability: 0 # 最小最大耐久，意味着在你一遍又一遍地不断修理武器之后，最大耐久永远不会低于这个值
+      #Lose_Max_Durability_Per_Repair: 500 # 每次修复损失的最大耐久。该项在修复工具中已经设置，所以这里不需要设置
+      Durability_Per_Shot: 1 # 每次射击耐久损失
+      Chance_To_Lose: 100% # 每次射击耐久损失的概率
+      Broken_Item: 
+        Type: IRON_SHOVEL
+        Name: "<red>损坏的M4A1"
+        Lore: 
+          - ""
+          - "看来需要修理一下了"
+      #Repair_Items:
+      #  - "universal_gun_repair_kit" # 修复工具，默认通用修复工具。您不需要修改它，只需要说明添加注释说明您需要的修复工具的属性，我们会根据您的注释进行修改。
+      # 保持默认即可
+      Break_Mechanics:
+        - "Sound{sound=ENTITY_ITEM_BREAK}"
+      Repair_Mechanics:
+        - "Sound{sound=BLOCK_ANVIL_USE}"
+      Deny_Repair_Mechanics:
+        - "Sound{sound=ENTITY_VILLAGER_NO}"
+        - "ActionBar{message=<red>Cannot repair item any more}"
+  Reload:
+    Trigger:
+      Main_Hand: "DROP_ITEM"
+      Off_Hand: "DROP_ITEM"
+    Magazine_Size: 30
+    Reload_Duration: 52
+    Start_Mechanics:
+      - "CustomSound{sound=reload.start.normal, volume=0.5, noise=0.1, listeners=Source{}}"
+    Finish_Mechanics:
+      - "CustomSound{sound=reload.end.normal, volume=0.5, noise=0.1}"
+  Damage:
+    Base_Damage: 5.0
+    Armor_Damage: 3
+    Dropoff:
+      - "10 -1.74"
+      - "25 -3.48"
+      - "50 -5.22"
+  Scope:
+    Trigger:
+      Main_Hand: "LEFT_CLICK"
+      Off_Hand: "LEFT_CLICK"
+    Zoom_Amount: 1.5
+    Shoot_Delay_After_Scope: 14
+    Mechanics:
+      - "CustomSound{sound=scope.in, volume=0.5, noise=0.1, listeners=Source{}}"
+    Zoom_Off:
+      Mechanics:
+        - "CustomSound{sound=scope.out, volume=0.5, noise=0.1, listeners=Source{}}"
+  Firearm_Action:
+    Type: "SLIDE"
+    Open:
+      Time: 8
+      Mechanics:
+        - "Sound{sound=BLOCK_NOTE_BLOCK_HAT, volume=0.5, noise=0.1, listeners=Source{}}"
+        - "Sound{sound=BLOCK_PISTON_CONTRACT, volume=0.5, noise=0.1, listeners=Source{}, delayBeforePlay=2}"
+    Close:
+      Time: 8
+      Mechanics:
+        - "Sound{sound=BLOCK_PISTON_EXTEND, volume=0.5, noise=0.1, listeners=Source{}}"
+
+
+  # The following options are added by WeaponMechanicsCosmetics, and you will
+  # not see the changes take effect until you purchase it.
+
+  Cosmetics:
+    Muzzle_Flash: true
+    Splash_Mechanics:
+      - "Sound{sound=ENTITY_GENERIC_SPLASH, pitch=1.85, noise=0.15} @Target{}"
+      - "Particle{particle=WATER_SPLASH, count=20, noise=0.2 0.2 0.2} @Target{}"
+    Bullet_Zip:
+      Maximum_Distance: 4.0
+      Sounds:
+        - "CustomSound{sound=fx.whiz, noise=0.02, listeners=Target{}} @Target{}"
+    Crossbow:
+      Only_When_Scoping: false
+
+  Trail:
+    Distance_Between_Particles: 0.1
+    Particle_Chooser: LOOP
+    Particles:
+      - "Particle{particle=DUST_COLOR_TRANSITION, color=RED, fadeColor=YELLOW, size=0.4}"
+
+  Show_Time:
+    Reload:
+      Item_Cooldown: true
+      Exp: true
+      Action_Bar: "<gray>Reloading <bar> <gray><time>s"
+      Action_Bar_Cancelled: "<red>Reload Cancelled"
+      Bar:
+        Left_Color: "<gray>"
+        Right_Color: "<red>"
+        Left_Symbol: "|"
+        Right_Symbol: "|"
+        Symbol_Amount: 30
+    Weapon_Equip_Delay:
+      Item_Cooldown: true
+    Shoot_Delay_After_Scope:
+      Item_Cooldown: true

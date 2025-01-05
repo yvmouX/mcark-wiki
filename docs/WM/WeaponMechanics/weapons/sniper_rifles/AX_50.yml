@@ -1,0 +1,188 @@
+AX_50:
+  Info:
+    Weapon_Item:
+      Type: "FEATHER"
+      Name: "<gold>AX-50"
+      Lore:
+        - "<gray>狙击枪"
+        - "弹药:<gray> .50 BMG"
+        - ""
+        - "<gold>基础伤害➣<gray> 12"
+        - "<gold>最大耐久➣<gray> 100"
+        - ""
+        - "<gold>按Q装填"
+      Unbreakable: true
+      Hide_Flags: true
+      Attributes:
+        - "GENERIC_MOVEMENT_SPEED -0.033"
+      Deny_Use_In_Crafting: true
+    Weapon_Info_Display:
+      Action_Bar:
+        Message: "<gold>AX-50<firearm_state> <gray>«<gold><ammo_left><gray>»<gold><reload>"
+    Weapon_Get_Mechanics:
+      - "Sound{sound=ITEM_ARMOR_EQUIP_CHAIN, pitch=0.5, listeners=Source{}}"
+    Weapon_Equip_Delay: 50
+    Cancel:
+      Drop_Item: true
+      Swap_Hands: true 
+      Arm_Swing_Animation: true
+      Break_Blocks: true 
+  Skin:
+    Default: 13
+    Scope: ADD 1000
+    Sprint: ADD 2000
+  Projectile:
+    Projectile_Settings:
+      Type: "INVISIBLE"
+      Minimum:
+        Speed: 160
+      Gravity: 9.8
+      Drag:
+        Base: 0.99
+        In_Water: 0.96
+        When_Raining_Or_Snowing: 0.98
+    Through:
+      Maximum_Through_Amount: 4
+      Blocks:
+        Default_Speed_Multiplier: 0.8
+        Whitelist: true
+        List:
+          - "$GLASS"
+          - "$LEAVES"
+      Entities:
+        Allow_Any: true
+        Default_Speed_Multiplier: 0.7
+  Shoot:
+    Trigger:
+      Main_Hand: "RIGHT_CLICK"
+      Off_Hand: "RIGHT_CLICK"
+      Circumstance:
+        Swimming: "DENY"
+        Sprinting: "DENY"
+        Dual_Wielding: "DENY"
+    Projectile_Speed: 250
+    Delay_Between_Shots: 20
+    Spread:
+      Base_Spread: 2.25
+      Modify_Spread_When:
+        Zooming: 25%
+        Sneaking: 50%
+        In_Midair: 150%
+    Recoil:
+      Push_Time: 200
+      Recover_Time: 200
+      Horizontal:
+        - -8
+        - 0
+        - 8
+      Vertical:
+        - 13
+      Modify_Recoil_When:
+        Zooming: 10%
+        Sneaking: 40%
+        In_Midair: 150%
+    Mechanics:
+      - "CustomSound{sound=shoot.ax50.loud, volume=6, noise=0.1}"
+    Custom_Durability:
+      Max_Durability: 100
+      Min_Max_Durability: 0
+      Durability_Per_Shot: 1
+      Chance_To_Lose: 100%
+      Broken_Item: 
+        Type: IRON_SHOVEL
+        Name: "<red>损坏的马格南左轮手枪"
+        Lore: 
+          - ""
+          - "看来需要修理一下了"
+      Break_Mechanics:
+        - "Sound{sound=ENTITY_ITEM_BREAK}"
+      Repair_Mechanics:
+        - "Sound{sound=BLOCK_ANVIL_USE}"
+      Deny_Repair_Mechanics:
+        - "Sound{sound=ENTITY_VILLAGER_NO}"
+        - "ActionBar{message=<red>Cannot repair item any more}"
+  Reload:
+    Trigger:
+      Main_Hand: "DROP_ITEM"
+      Off_Hand: "DROP_ITEM"
+    Magazine_Size: 5
+    Reload_Duration: 78
+    Start_Mechanics:
+      - "CustomSound{sound=reload.start.normal, volume=0.5, noise=0.1}"
+    Finish_Mechanics:
+      - "CustomSound{sound=reload.end.normal, volume=0.5, noise=0.1}"
+    Ammo:
+      Ammos:
+        - 50mm
+  Damage:
+    Base_Damage: 12
+    Armor_Damage: 4
+  Scope:
+    Trigger:
+      Main_Hand: "LEFT_CLICK"
+      Off_Hand: "LEFT_CLICK"
+    Zoom_Amount: 1.5
+    Shoot_Delay_After_Scope: 16
+    Unscope_After_Shot: true
+    Mechanics:
+      - "CustomSound{sound=scope.in, volume=0.5, noise=0.1, listeners=Source{}}"
+    Zoom_Off:
+      Mechanics:
+        - "CustomSound{sound=scope.out, volume=0.5, noise=0.1, listeners=Source{}}"
+    Zoom_Stacking:
+      Stacks:
+        - 4
+        - 10
+      Mechanics:
+        - "CustomSound{sound=scope.in, volume=0.5, noise=0.1}"
+  Firearm_Action:
+    Type: "LEVER"
+    Open:
+      Time: 10
+      Mechanics:
+        - "Sound{sound=BLOCK_NOTE_BLOCK_HAT, volume=0.5, noise=0.1, listeners=Source{}}"
+        - "Sound{sound=BLOCK_PISTON_CONTRACT, volume=0.5, noise=0.1, listeners=Source{}, delayBeforePlay=4}"
+    Close:
+      Time: 10
+      Mechanics:
+        - "Sound{sound=BLOCK_PISTON_EXTEND, volume=0.5, noise=0.1, listeners=Source{}}"
+
+  # The following options are added by WeaponMechanicsCosmetics, and you will
+  # not see the changes take effect until you purchase it.
+
+  Cosmetics:
+    Muzzle_Flash: true
+    Splash_Mechanics:
+      - "Sound{sound=ENTITY_GENERIC_SPLASH, pitch=1.85, noise=0.15} @Target{}"
+      - "Particle{particle=WATER_SPLASH, count=20, noise=0.2 0.2 0.2} @Target{}"
+    Bullet_Zip:
+      Maximum_Distance: 4.0
+      Sounds:
+        - "CustomSound{sound=fx.whiz, noise=0.02} @Target{}"
+    Crossbow:
+      Only_When_Scoping: false
+
+  Trail:
+    Distance_Between_Particles: 0.3
+    Particle_Chooser: LOOP
+    Particles:
+      - "Particle{particle=DUST_COLOR_TRANSITION, color=RED, fadeColor=YELLOW, size=0.4}"
+
+  Show_Time:
+    Reload:
+      Item_Cooldown: true
+      Exp: true
+      Action_Bar: "<gray>Reloading <bar> <gray><time>s"
+      Action_Bar_Cancelled: "<red>Reload Cancelled"
+      Bar:
+        Left_Color: "<gray>"
+        Right_Color: "<red>"
+        Left_Symbol: "|"
+        Right_Symbol: "|"
+        Symbol_Amount: 5
+    Weapon_Equip_Delay:
+      Item_Cooldown: true
+    Firearm_Actions:
+      Item_Cooldown: true
+    Shoot_Delay_After_Scope:
+      Item_Cooldown: true

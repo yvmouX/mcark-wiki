@@ -1,0 +1,191 @@
+# 每个模板前的废话：
+# 好吧，不想废话了，这个新内容很少，可以大眼看一遍。
+MG08:
+  Info:
+    Weapon_Item:
+      Type: "FEATHER"
+      Name: "<gold>MG08" 
+      Lore:
+        - "<gray>重型机枪"
+        - "弹药:<gray> 7.92mm 子弹"
+        - ""
+        - "割过草吗？"
+        - ""
+        - "<gold>基础伤害➣<gray> 8"
+        - "<gold>最大耐久➣<gray> 1500"
+        - ""
+        - "<gold>按Q装填"
+      Unbreakable: true # 关闭后，可以自定义武器耐久。在下面你可以找到示例
+      Hide_Flags: true
+      Attributes:
+        - "GENERIC_MOVEMENT_SPEED -0.07"
+      Deny_Use_In_Crafting: true
+    Weapon_Info_Display:
+      Action_Bar:
+        Message: "<gold>MG08<firearm_state> <gray>«<gold><ammo_left><gray>»<gold><reload>"
+    Weapon_Get_Mechanics:
+      - "Sound{sound=ITEM_ARMOR_EQUIP_CHAIN, pitch=0.75, listeners=Source{}}"
+    Weapon_Equip_Delay: 40
+    Cancel:
+      Drop_Item: true
+      Swap_Hands: true 
+      Arm_Swing_Animation: true
+      Break_Blocks: true 
+  Skin:
+    Default: 11
+    Scope: ADD 1000
+    Sprint: ADD 2000
+  Projectile:
+    Projectile_Settings:
+      Type: "SNOWBALL"
+      Minimum:
+        Speed: 50
+      Gravity: 15.0
+      Drag:
+        Base: 0.99
+        In_Water: 0.96
+        When_Raining_Or_Snowing: 0.98
+    Through:
+      Maximum_Through_Amount: 5
+      Blocks:
+        Default_Speed_Multiplier: 0.8
+        Whitelist: true
+        List:
+          - "$GLASS"
+          - "$LEAVES"
+      Entities:
+        Allow_Any: true
+        Default_Speed_Multiplier: 0.7
+  Shoot:
+    Trigger:
+      Main_Hand: "RIGHT_CLICK"
+      Off_Hand: "RIGHT_CLICK"
+      Circumstance:
+        Swimming: "DENY"
+        Sprinting: "DENY"
+        Dual_Wielding: "DENY"
+    Projectile_Speed: 80
+    Fully_Automatic_Shots_Per_Second: 5
+    Spread:
+      Base_Spread: 3.5
+      Modify_Spread_When:
+        Zooming: 50%
+        Sneaking: 80%
+        In_Midair: 150%
+    Recoil:
+      Push_Time: 200
+      Horizontal:
+        - 2.8
+        - 0
+      Vertical:
+        - 2.8
+      Modify_Recoil_When:
+        Zooming: 20%
+        Sneaking: 50%
+        In_Midair: 150%
+    Mechanics:
+      - "CustomSound{sound=shoot.mg34.loud, volume=6, noise=0.1}"
+    Custom_Durability:
+      Max_Durability: 1500 # 最大耐久
+      Min_Max_Durability: 0 # 最小最大耐久，意味着在你一遍又一遍地不断修理武器之后，最大耐久永远不会低于这个值
+      #Lose_Max_Durability_Per_Repair: 500 # 每次修复损失的最大耐久。该项在修复工具中已经设置，所以这里不需要设置
+      Durability_Per_Shot: 1 # 每次射击耐久损失
+      Chance_To_Lose: 100% # 每次射击耐久损失的概率
+      Broken_Item: 
+        Type: IRON_SHOVEL
+        Name: "<red>损坏的MG08"
+        Lore: 
+          - ""
+          - "看来需要修理一下了"
+      #Repair_Items:
+      #  - "universal_gun_repair_kit" # 修复工具，默认通用修复工具。您不需要修改它，只需要说明添加注释说明您需要的修复工具的属性，我们会根据您的注释进行修改。
+      # 保持默认即可
+      Break_Mechanics:
+        - "Sound{sound=ENTITY_ITEM_BREAK}"
+      Repair_Mechanics:
+        - "Sound{sound=BLOCK_ANVIL_USE}"
+      Deny_Repair_Mechanics:
+        - "Sound{sound=ENTITY_VILLAGER_NO}"
+        - "ActionBar{message=<red>Cannot repair item any more}"
+  Reload:
+    Trigger:
+      Main_Hand: "DROP_ITEM"
+      Off_Hand: "DROP_ITEM"
+    Magazine_Size: 200
+    Reload_Duration: 70
+    Ammo:
+      Ammos: 
+        - 7-92
+    Start_Mechanics:
+      - "CustomSound{sound=reload.start.heavy, volume=0.5, noise=0.1}"
+    Finish_Mechanics:
+      - "CustomSound{sound=reload.end.heavy, volume=0.5, noise=0.1}"
+  Damage:
+    Base_Damage: 8.0
+    Armor_Damage: 2
+    Dropoff:
+      - "10 -1.44"
+      - "25 -2.88"
+      - "50 -4.32"
+  Scope:
+    Trigger:
+      Main_Hand: "LEFT_CLICK"
+      Off_Hand: "LEFT_CLICK"
+    Zoom_Amount: 2.0
+    Shoot_Delay_After_Scope: 22
+    Mechanics:
+      - "CustomSound{sound=scope.in, volume=0.5, noise=0.1, listeners=Source{}}"
+    Zoom_Off:
+      Mechanics:
+        - "CustomSound{sound=scope.out, volume=0.5, noise=0.1, listeners=Source{}}"
+  Firearm_Action:
+    Type: "SLIDE"
+    Open:
+      Time: 8
+      Mechanics:
+        - "Sound{sound=BLOCK_NOTE_BLOCK_HAT, volume=0.5, noise=0.1, listeners=Source{}}"
+        - "Sound{sound=BLOCK_PISTON_CONTRACT, volume=0.5, noise=0.1, listeners=Source{}, delayBeforePlay=2}"
+    Close:
+      Time: 8
+      Mechanics:
+        - "Sound{sound=BLOCK_PISTON_EXTEND, volume=0.5, noise=0.1, listeners=Source{}}"
+
+  # The following options are added by WeaponMechanicsCosmetics, and you will
+  # not see the changes take effect until you purchase it.
+
+  Cosmetics:
+    Muzzle_Flash: true
+    Splash_Mechanics:
+      - "Sound{sound=ENTITY_GENERIC_SPLASH, pitch=1.85, noise=0.15} @Target{}"
+      - "Particle{particle=WATER_SPLASH, count=20, noise=0.2 0.2 0.2} @Target{}"
+    Bullet_Zip:
+      Maximum_Distance: 4.0
+      Sounds:
+        - "CustomSound{sound=fx.whiz, noise=0.02, listeners=Target{}} @Target{}"
+    Crossbow:
+      Only_When_Scoping: false
+
+  Trail:
+    Distance_Between_Particles: 0.3
+    Particle_Chooser: LOOP
+    Particles:
+      - "Particle{particle=CRIT}"
+
+  Show_Time:
+    Reload:
+      Item_Cooldown: true
+      Exp: true
+      Action_Bar: "<gray>Reloading <bar> <gray><time>s"
+      Action_Bar_Cancelled: "<red>Reload Cancelled"
+      Bar:
+        Left_Color: "<gray>"
+        Right_Color: "<red>"
+        Left_Symbol: "|"
+        Right_Symbol: "|"
+        Symbol_Amount: 75
+    Weapon_Equip_Delay:
+      Item_Cooldown: true
+    Firearm_Actions:
+      Item_Cooldown: true
+    Shoot_Delay_After_Scope:
+      Item_Cooldown: true

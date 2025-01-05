@@ -6,7 +6,7 @@
 
 - 更多玩法等待您的发现
 
-[WIKI](./开始.md)
+[WIKI](./README.md)
 [QQ群](https://qm.qq.com/q/QutjSWRnou)
 [论坛](https://bbs.mcark.icu)
 <!-- 背景图片 -->

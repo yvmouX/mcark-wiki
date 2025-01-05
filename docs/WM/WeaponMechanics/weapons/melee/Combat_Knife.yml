@@ -1,0 +1,89 @@
+Combat_Knife:
+  Info:
+    Weapon_Item:
+      Type: "FEATHER"
+      Name: "<gold>战术匕首"
+      Lore:
+        - "<gray>快速安静地解决敌人"
+        - "<gray>但是它看起来很短"
+        - ""
+        - "<gold>基础伤害➣<gray> 13"
+        - "<gold>最大耐久➣<gray> 10"
+        - ""
+        
+      Enchantments:
+        - sharpness 1
+      Unbreakable: true
+      Hide_Flags: true
+      Attributes:
+        - "GENERIC_MOVEMENT_SPEED 0.004"
+        - "GENERIC_ATTACK_SPEED -3"
+      Deny_Use_In_Crafting: true
+    Weapon_Get_Mechanics:
+      - "Sound{sound=ITEM_ARMOR_EQUIP_CHAIN, pitch=0.75, listeners=Source{}}"
+  Skin:
+    Default:
+      Custom_Model_Data: -10  # negative numbers work fine for Custom Model Data
+  Shoot:
+    Trigger:
+      Main_Hand: "RIGHT_CLICK"
+      Off_Hand: "RIGHT_CLICK"
+      Circumstance:
+        Dual_Wielding: "DENY"
+    Custom_Durability:
+      Max_Durability: 10 # 最大耐久
+      Min_Max_Durability: 0 # 最小最大耐久，意味着在你一遍又一遍地不断修理武器之后，最大耐久永远不会低于这个值
+      #Lose_Max_Durability_Per_Repair: 500 # 每次修复损失的最大耐久。该项在修复工具中已经设置，所以这里不需要设置
+      Durability_Per_Shot: 1 # 每次射击耐久损失
+      Chance_To_Lose: 100% # 每次射击耐久损失的概率
+      Broken_Item: 
+        Type: IRON_SHOVEL
+        Name: "<red>损坏的战术匕首"
+        Lore: 
+          - ""
+          - "看来需要修理一下了"
+      #Repair_Items:
+      #  - "universal_gun_repair_kit" # 修复工具，默认通用修复工具。您不需要修改它，只需要说明添加注释说明您需要的修复工具的属性，我们会根据您的注释进行修改。
+      # 保持默认即可
+      Break_Mechanics:
+        - "Sound{sound=ENTITY_ITEM_BREAK}"
+      Repair_Mechanics:
+        - "Sound{sound=BLOCK_ANVIL_USE}"
+      Deny_Repair_Mechanics:
+        - "Sound{sound=ENTITY_VILLAGER_NO}"
+        - "ActionBar{message=<red>Cannot repair item any more}"
+  Damage:
+    Base_Damage: 13.0
+    Armor_Damage: 20
+    Victim_Mechanics:
+      Sounds:
+        - "Sound{sound=ENTITY_ARROW_SHOOT} @Target{}"
+        - "Sound{sound=ENTITY_SLIME_JUMP} @Target{}"
+    Head:
+      Bonus_Damage: 10.0
+      Victim_Mechanics:
+        - "Firework{effects=[(shape=BALL, color=RED, flicker=true, trail=true)]} @Source{offset=0 2 0}"
+    Backstab:
+      Bonus_Damage: 7.0
+      Victim_Mechanics:
+        - "Firework{effects=[(shape=BURST, color=BLACK, flicker=true, trail=true)]} @Source{offset=0 2 0}"
+  Melee:
+    Enable_Melee: true
+    Melee_Range: 4
+    Melee_Hit_Delay: 20
+    Melee_Miss:
+      Mechanics:
+        - "Sound{sound=BLOCK_ANVIL_HIT, noise=0.1}"
+      Melee_Miss_Delay: 20
+      Consume_On_Miss: false
+
+  # The following options are added by WeaponMechanicsCosmetics, and you will
+  # not see the changes take effect until you purchase it.
+
+  Show_Time:
+    Melee_Miss_Delay:
+      Item_Cooldown: true
+      Exp: true
+    Melee_Hit_Delay:
+      Item_Cooldown: true
+      Exp: true
