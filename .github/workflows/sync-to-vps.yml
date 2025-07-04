@@ -23,4 +23,4 @@ jobs:
         key: ${{ secrets.SERVER_SSH_KEY }} # 服务器SSH 密钥
         # password: ${{ secrets.SERVER_USER_PASSWORD }} # 服务器用户密码
         source: './' # 源目录
-        target: '/opt/1panel/www/sites/wiki.ycraft.icu/index'
+        target: ${{ secrets.SERVER_TARGET }} # 目标目录
