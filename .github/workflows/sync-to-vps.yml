@@ -15,7 +15,7 @@ jobs:
     steps:
     # 部署到 vps
     - name: Rsync files
-      uses: burnett01/rsync-deployments@5.2.3
+      uses: burnett01/rsync-deployments@7.0.2
       with:
         switches: -avz --chown=$USER:$USER  # 强制指定所有者
         path: ./
