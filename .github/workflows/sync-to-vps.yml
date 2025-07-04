@@ -19,7 +19,7 @@ jobs:
       with:
         switches: -avz --chown=$USER:$USER  # 强制指定所有者
         path: ./
-        remote_path: /opt/1panel/www/sites/wiki.ycraft.icu/index/
+        remote_path: /opt/ww/
         remote_host: ${{ secrets.SERVER_HOST }}
         remote_user: ${{ secrets.SERVER_USER }}
         remote_key: ${{ secrets.SERVER_SSH_KEY }}
