@@ -26,4 +26,4 @@
 <img src="https://img-cdn.yvmou.cn/pigo/202412182001488.jpg" alt="Cache_-729afb58688756f0" style="zoom:50%;" />
 
 # ARK测试服反馈问卷
-<iframe src='https://www.wjx.cn/vm/OgZdbAK.aspx?width=750&source=iframe&s=t' width='789' height='750' frameborder='0' style='overflow:auto'></iframe>
+<iframe src='https://www.wjx.cn/vm/hHt6yiH.aspx?width=750&source=iframe&s=t&sm=t' width='789' height='750' frameborder='0' style='overflow:auto'></iframe>
